@@ -1,0 +1,27 @@
+import AboutSection from "@/components/home/about-section";
+import BlogsSection from "@/components/home/blogs-section";
+import ClientSection from "@/components/home/client-reviews";
+import HeroSection from "@/components/home/hero-section";
+import WorksSection from "@/components/home/works-section";
+import Counters from "@/components/shared/counters";
+import CustomMarquee from "@/components/shared/custom-marquee";
+import StackSection from "@/components/shared/stacked-cards-section";
+
+
+export default function Home() {
+  return (
+    <main className="">
+      <div className="pt-40 bg-[url('/images/hero-bg.svg')] bg-no-repeat">
+        <HeroSection />
+        <AboutSection />
+      </div>
+      <StackSection />
+      <div className="py-20 bg-[url('/images/hero-bg.svg')] bg-center ">
+        <CustomMarquee />
+        <WorksSection />
+        <Counters />
+        <BlogsSection />
+        <ClientSection/>
+      </div>
+    </main>)
+}

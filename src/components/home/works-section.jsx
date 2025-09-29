@@ -7,7 +7,7 @@ import WorkSlider from '../shared/work-slider'
 import * as motion from "motion/react-client"
 const WorksSection = () => {
   const locale = useLocale()
-  const tabStyle = "py-3 px-6 data-[state=active]:bg-primary-800 data-[state=active]:text-white data-[state=active]:rounded-full max-md:data-[state=active]:rounded-2xl"
+  const tabStyle = "py-3 px-4 data-[state=active]:bg-primary-800 data-[state=active]:text-white data-[state=active]:rounded-full max-md:data-[state=active]:rounded-2xl"
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}

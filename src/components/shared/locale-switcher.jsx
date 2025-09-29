@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function LocaleSwitcher() {
+export default function LocaleSwitcher({isDark=false}) {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
@@ -35,8 +35,8 @@ export default function LocaleSwitcher() {
       disabled={isPending}
     >
       <SelectTrigger
-        iconColor={"text-primary-900"}
-        className="w-fit text-base !h-10 rounded-full bg-[#14688B4D] text-primary-900 font-semibold hover:bg-main-navy transition-all duration-300"
+        iconColor={isDark ? "text-white" : "text-primary-900"}
+        className={`"w-fit text-base !h-10 rounded-full  font-semibold hover:bg-main-navy transition-all duration-300 ${isDark ? "text-white bg-primary-900" : "bg-[#14688B4D] text-primary-900"}` }
       >
         <SelectValue placeholder="Select language" />
       </SelectTrigger>

@@ -20,7 +20,7 @@ function HeroSection() {
           <div className='animate-pulse  size-4 rounded-full bg-primary-400/25 flex items-center justify-center '>
             <div className='size-3 rounded-full bg-primary-400'></div>
           </div>
-          <p className='text-white-50 text-sm font-bold'>جاهزين للعمل علي مشروعك</p>
+          <p className='text-white-50 md:text-sm text-xs font-bold'>جاهزين للعمل علي مشروعك</p>
         </motion.div>
         {/* title */}
         <motion.h1
@@ -28,7 +28,7 @@ function HeroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className='text-3xl md:text-4xl lg:text-5xl  text-gray-100 '>
+          className='text-2xl md:text-4xl lg:text-5xl  text-gray-100 '>
           لأن نجاح مشروعك رحلة، وخطوته الأولى مع <span className='text-primary-700 font-bold leading-[2.2]'>Subcode</span> , النجاح يبدأ من هنا... يبدأ معنا
         </motion.h1>
         <motion.p

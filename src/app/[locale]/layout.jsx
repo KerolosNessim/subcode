@@ -2,10 +2,17 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "../globals.css";
+import { Alexandria } from 'next/font/google'
 import { getMessages } from 'next-intl/server';
 import Navbar from '@/components/shared/navbar';
+import Footer from '@/components/shared/footer';
 
-
+const alexandria = Alexandria({
+  subsets: ["latin"],
+  variable: "--font-alexandria",
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -23,11 +30,12 @@ export default async function RootLayout({ children, params }) {
     <html lang={locale}>
       <body
         dir={locale === "ar" ? "rtl" : "ltr"}
-        className={` antialiased`}
+        className={` antialiased ${alexandria.className}`}
       >
         <NextIntlClientProvider messages={messages} locale={locale} >
           <Navbar />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

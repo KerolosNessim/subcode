@@ -2,6 +2,7 @@ import AboutSection from "@/components/home/about-section";
 import BlogsSection from "@/components/home/blogs-section";
 import ClientSection from "@/components/home/client-reviews";
 import HeroSection from "@/components/home/hero-section";
+import TeamSection from "@/components/home/team-section";
 import WorksSection from "@/components/home/works-section";
 import Counters from "@/components/shared/counters";
 import CustomMarquee from "@/components/shared/custom-marquee";
@@ -21,7 +22,8 @@ export default function Home() {
         <WorksSection />
         <Counters />
         <BlogsSection />
-        <ClientSection/>
+        <ClientSection />
+        <TeamSection />
       </div>
     </main>)
 }

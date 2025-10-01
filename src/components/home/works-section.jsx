@@ -1,11 +1,9 @@
-import React, { use } from 'react'
-import SectionHeader from '../shared/section-header'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useLocale } from 'next-intl'
-import WorkCard from '../shared/work-card'
-import WorkSlider from '../shared/work-slider'
 import * as motion from "motion/react-client"
+import { useLocale } from 'next-intl'
+import SectionHeader from '../shared/section-header'
 import WorkGrid from '../shared/work-grid'
+import WorkSlider from '../shared/work-slider'
 const WorksSection = ({ page = false }) => {
   const locale = useLocale()
   const tabStyle = "py-3 px-4 data-[state=active]:bg-primary-800 data-[state=active]:text-white data-[state=active]:rounded-full max-md:data-[state=active]:rounded-2xl"

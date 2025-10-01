@@ -144,7 +144,7 @@ export const Card = ({
             ))}
           </ul>
 
-          <DynamicLink href={"#"}>
+          <DynamicLink href={"/services/slug"}>
             تفاصيل الخدمة
           </DynamicLink>
 

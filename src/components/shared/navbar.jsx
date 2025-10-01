@@ -62,6 +62,14 @@ function Navbar() {
           </li>
           <li>
             <Link
+              href="/prices"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+            >
+              الاسعار
+            </Link>
+          </li>
+          <li>
+            <Link
               href="/products"
               className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
             >

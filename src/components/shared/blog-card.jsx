@@ -17,7 +17,7 @@ const BlogCrd = () => {
         </div>
         <h3 className='text-xl font-bold text-gray-100'>صنع تجارب مستخدمين عاطفية وجذابة</h3>
         <p className=' leading-6 text-gray-200 line-clamp-4'>افتح قوة تحليلات البيانات واحصل على رؤى قابلة للتنفيذ لاتخاذ قرارات تجارية مستنيرة. عزز رؤية موقعك على الويب افتح قوة تحليلات البيانات واحصل على رؤى قابلة للتنفيذ لاتخاذ قرارات تجارية مستنيرة. عزز رؤية موقعك على الويب</p>
-        <DynamicLink href={'#'} external >
+        <DynamicLink href={'/blogs/slug'}  >
           إقرأ المقال
         </DynamicLink>
       </div>

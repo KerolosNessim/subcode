@@ -179,6 +179,19 @@
   }
 }
 
+@theme {
+  --animate-wiggle: wiggle 3s ease-in-out infinite;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
 @utility container {
   @apply w-[95%] mx-auto lg:w-[90%];
 }

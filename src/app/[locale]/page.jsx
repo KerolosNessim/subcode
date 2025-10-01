@@ -11,8 +11,8 @@ import StackSection from "@/components/shared/stacked-cards-section";
 
 export default function Home() {
   return (
-    <main className="">
-      <div className="pt-40 bg-[url('/images/hero-bg.svg')] bg-no-repeat">
+    <main >
+      <div className="md:pt-40 pt-30 bg-[url('/images/hero-bg.svg')] bg-no-repeat">
         <HeroSection />
         <AboutSection />
       </div>

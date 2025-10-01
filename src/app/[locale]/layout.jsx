@@ -30,7 +30,7 @@ export default async function RootLayout({ children, params }) {
     <html lang={locale}>
       <body
         dir={locale === "ar" ? "rtl" : "ltr"}
-        className={` antialiased ${alexandria.className}`}
+        className={`${alexandria.className}`}
       >
         <NextIntlClientProvider messages={messages} locale={locale} >
           <Navbar />

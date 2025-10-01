@@ -35,7 +35,7 @@ const projects = [
 
 ];
 
-export default function StackSection() {
+export default function StackSection({ withLink = true }) {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -89,12 +89,11 @@ export default function StackSection() {
             );
           })}
         </div>
-        <div className='flex items-center justify-center'>
-
-          <DynamicLink href={''}>
+        {withLink &&
+          <DynamicLink href={'/services'} className={"mx-auto"}>
             إكتشف الخدمات
           </DynamicLink>
-        </div>
+        }
       </section>
     </ReactLenis>
   );

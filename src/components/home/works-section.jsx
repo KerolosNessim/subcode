@@ -5,7 +5,8 @@ import { useLocale } from 'next-intl'
 import WorkCard from '../shared/work-card'
 import WorkSlider from '../shared/work-slider'
 import * as motion from "motion/react-client"
-const WorksSection = () => {
+import WorkGrid from '../shared/work-grid'
+const WorksSection = ({ page = false }) => {
   const locale = useLocale()
   const tabStyle = "py-3 px-4 data-[state=active]:bg-primary-800 data-[state=active]:text-white data-[state=active]:rounded-full max-md:data-[state=active]:rounded-2xl"
   return (
@@ -25,19 +26,65 @@ const WorksSection = () => {
           <TabsTrigger value="markting" className={tabStyle}>تسويق إلكتروني</TabsTrigger>
         </TabsList>
         <TabsContent value="all">
-          <WorkSlider />
+          {page ?
+            <>
+              <div className='max-md:hidden'>
+                <WorkGrid />
+              </div>
+              <div className='md:hidden'>
+                <WorkSlider />
+              </div>
+            </>
+            : <WorkSlider />}
+
         </TabsContent>
         <TabsContent value="web">
-          <WorkSlider/>
+          {page ?
+            <>
+              <div className='max-md:hidden'>
+                <WorkGrid />
+              </div>
+              <div className='md:hidden'>
+                <WorkSlider />
+              </div>
+            </>
+            : <WorkSlider />}
         </TabsContent>
         <TabsContent value="store">
-          <WorkSlider/>
+          {page ?
+            <>
+              <div className='max-md:hidden'>
+                <WorkGrid />
+              </div>
+              <div className='md:hidden'>
+                <WorkSlider />
+              </div>
+            </>
+            : <WorkSlider />}
         </TabsContent>
         <TabsContent value="app">
-          <WorkSlider/>
+          {page ?
+            <>
+              <div className='max-md:hidden'>
+                <WorkGrid />
+              </div>
+              <div className='md:hidden'>
+                <WorkSlider />
+              </div>
+            </>
+            : <WorkSlider />}
         </TabsContent>
         <TabsContent value="markting">
-          <WorkSlider/>
+          {page ?
+            <>
+              <div className='max-md:hidden'>
+                <WorkGrid />
+              </div>
+              <div className='md:hidden'>
+                <WorkSlider />
+              </div>
+            </>
+            : <WorkSlider />}
         </TabsContent>
       </Tabs>
     </motion.section>

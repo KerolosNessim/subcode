@@ -31,7 +31,7 @@ function Navbar() {
           <li>
             <Link
               href="/"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               الرئيسية
             </Link>
@@ -39,7 +39,7 @@ function Navbar() {
           <li>
             <Link
               href="/about"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               من نحن
             </Link>
@@ -47,7 +47,7 @@ function Navbar() {
           <li>
             <Link
               href="/services"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               خدماتنا
             </Link>
@@ -55,7 +55,7 @@ function Navbar() {
           <li>
             <Link
               href="/works"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               اعمالنا
             </Link>
@@ -63,23 +63,23 @@ function Navbar() {
           <li>
             <Link
               href="/prices"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               الاسعار
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/products"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               منتجاتنا
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               href="/blogs"
-              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300"
+              className="capitalize font-semibold hover:text-primary-800 transition-all duration-300 max-lg:text-sm"
             >
               المقالات
             </Link>

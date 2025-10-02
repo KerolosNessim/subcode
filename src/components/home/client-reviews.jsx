@@ -10,6 +10,7 @@ import {
 import { useLocale } from 'next-intl'
 import ClientCard from '../shared/client-card'
 import * as motion from "motion/react-client"
+import ClientSlider from '../shared/client-slider'
 const ClientSection = () => {
   const locale = useLocale()
   return (
@@ -19,19 +20,8 @@ const ClientSection = () => {
       viewport={{ once: true }}
       transition={{ duration: 1 }}
       className='container py-20 lg:space-y-8 space-y-6 '>
-      <SectionHeader title='أراء عملائنا' disc={"كن صاحب قصة النجاح القادمة"}/>
-      <Carousel className={"lg:space-y-8 space-y-6"} opts={{ loop: true, direction: locale === "ar" ? "rtl" : "ltr" ,align: "start" }}>
-        <CarouselContent>
-          <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard/></CarouselItem>
-          <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard/></CarouselItem>
-          <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard/></CarouselItem>
-
-        </CarouselContent>
-        <div className={`flex items-center justify-center gap-4 w-full ${locale === "ar" ? "flex-row-reverse" : "flex-row"}`}>
-        <CarouselPrevious className={"static translate-0"}/>
-          <CarouselNext className={"static translate-0"} />
-        </div>
-      </Carousel>
+      <SectionHeader title='أراء عملائنا' disc={"كن صاحب قصة النجاح القادمة"} />
+      <ClientSlider />
     </motion.section>
   )
 }

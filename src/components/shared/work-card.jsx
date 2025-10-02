@@ -14,7 +14,7 @@ const WorkCard = () => {
         <p className=' leading-6 text-gray-200 line-clamp-3'>
           عقدي" هو منصّة مبتكرة لتوثيق العقود العقارية إلكترونياً بكل سرعة وكفاءة (سكني وتجاري). يوفّر لك التطبيق طريقة آمنة وموثوقة لإنجاز معاملاتك العقارية 
         </p>
-        <DynamicLink href={'#'} external className={"mx-auto"}>
+        <DynamicLink href={'/works/slug'}  className={"mx-auto"}>
           تفاصيل المشروع
         </DynamicLink>
       </div>

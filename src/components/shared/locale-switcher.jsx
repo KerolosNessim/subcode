@@ -36,7 +36,7 @@ export default function LocaleSwitcher({isDark=false}) {
     >
       <SelectTrigger
         iconColor={isDark ? "text-white" : "text-primary-900"}
-        className={`"w-fit text-base !h-10 rounded-full  font-semibold hover:bg-main-navy transition-all duration-300 ${isDark ? "text-white bg-primary-900" : "bg-[#14688B4D] text-primary-900"}` }
+        className={`"w-fit text-base !h-10 rounded-full  font-semibold hover:bg-main-navy transition-all duration-300 max-lg:text-sm ${isDark ? "text-white bg-primary-900" : "bg-[#14688B4D] text-primary-900"}` }
       >
         <SelectValue placeholder="Select language" />
       </SelectTrigger>

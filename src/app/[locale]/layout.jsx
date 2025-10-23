@@ -6,6 +6,7 @@ import { Alexandria } from 'next/font/google'
 import { getMessages } from 'next-intl/server';
 import Navbar from '@/components/shared/navbar';
 import Footer from '@/components/shared/footer';
+import WhatsappContact from '@/components/shared/whatsapp-contact';
 
 const alexandria = Alexandria({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default async function RootLayout({ children, params }) {
       >
         <NextIntlClientProvider messages={messages} locale={locale} >
           <Navbar />
+          <WhatsappContact />
           {children}
           <Footer />
         </NextIntlClientProvider>

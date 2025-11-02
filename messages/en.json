@@ -1,5 +1,68 @@
 {
-  "home": "home page",
-  "about": "about",
-  "contact": "contact"
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Our Services",
+    "works": "Our Works",
+    "pricing": "Pricing",
+    "products": "Our Products",
+    "articles": "Blogs"
+  },
+
+  "hero": {
+    "badge": "Ready to work on your project",
+    "title": "Because your project's success is a journey, and its first step is with ",
+    "titleHighlight": "Subcode",
+    "titleSuffixes": [
+      " where success begins... begins with us",
+      " your partner in success",
+      " where ideas become reality",
+      " crafting the digital future together",
+      " years of excellence in technology",
+      " innovative solutions for your business"
+    ],
+    "description": "At Subcode, we believe that the success of any idea begins with a proper digital step. That's why we provide innovative, fast, and secure solutions that help you turn your vision into reality and grow your business with confidence.",
+    "ctaPrimary": "Start Your Project Now",
+    "ctaSecondary": "Contact Us"
+  },
+    "about": {
+      "title": "About Us",
+    "consultation": "Request a Free Consultation",
+    "knowMore": "Learn More"
+  },
+    "services": {
+    "title": "Our Services",
+    "description": "Innovative solutions that help you grow your business and develop your digital presence. We offer specialized expertise that guarantees tangible results.",
+    "more": "Discover Our Services",
+    "detailes":"Service Details"
+  },
+  "marquee": [
+     "Easy to Use",
+    "Easy Access",
+   "24/7 Support",
+     "High Speed"
+  ],
+  "works":{
+    "title":"Our Works",
+    "description":"In every project we undertake, we focus on delivering innovative solutions that help you grow your business and develop your digital presence.",
+    "detailes":"Project Details"
+  },
+  "team": {
+    "title": "Our Team",
+    "description": "We are a diverse group of designers, thinkers, and innovators united by a shared passion for creating meaningful work."
+  },
+  "clientReviews": {
+    "title": "Client Reviews",
+    "description": "Be the next success story"
+  },
+  "counters": {
+    "title": "Witness Success: Real Growth in Numbers!",
+    "description": "Discover the impact of our work and how it drives tangible results for companies",
+    "items": [
+      { "number": 660, "label": "Projects" },
+      { "number": 120, "label": "Clients" },
+      { "number": 15, "label": "Years of Experience" },
+      { "number": 50, "label": "Awards" }
+    ]
+  }
 }

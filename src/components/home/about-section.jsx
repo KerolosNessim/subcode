@@ -4,11 +4,26 @@ import DynamicLinkDark from '../shared/dynamic-link-dark'
 import DynamicLink from '../shared/dynamic-link'
 import Image from 'next/image'
 import * as motion from "motion/react-client"
-const AboutSection = () => {
+import { getData } from '@/services/fetch-data'
+import { getLocale, getTranslations } from 'next-intl/server'
+const AboutSection = async () => {
+  const locale = await getLocale()
+  const t = await getTranslations('about')
+  let data
+  const res = await getData({
+    url: "/about-us"
+  })
+  if (res?.code === 200) {
+    data = res?.data?.data
+  }
+  else {
+    data = null
+  }
   return (
+    data?
     <section className='pt-16 space-y-8 overflow-hidden' >
       <div className='container'>
-        <SectionHeader />
+        <SectionHeader title={t('title')} />
       </div>
 
       {/* image and content */}
@@ -20,13 +35,12 @@ const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           className=' text-gray-100 lg:w-1/3 md:2/3 space-y-6'>
-          <h3 className='lg:text-2xl text-xl font-medium '>شركة <span className='text-primary-700 font-bold'>Subcode</span> للبرمجيات والتسويق الرقمي</h3>
-          <p className='lg:text-xl md:text-lg text-sm' >نحن في شركة Subcode نؤمن أن التكنولوجيا والتسويق الرقمي هما حجر الأساس لنجاح أي عمل في العصر الحديث. موزعين في عدة دول منها مصر، تركيا، والسعودية.</p>
-          <p className='lg:text-xl md:text-lg text-sm text-gray-300' >هدفنا هو تطوير برمجيات قوية وف ّعالة تعيش لسنوات، وتساهم في بناء مستقبل رقمي مستدام يساعد الشركات واألفراد على النمو والتطور بثقة.</p>
+            <h3 className='lg:text-2xl text-xl font-medium '>{data?.title}</h3>
+            <p className='lg:text-xl md:text-lg text-sm text-gray-300' >{data?.description}</p>
           <div className='flex items-center  gap-4 '>
-            <DynamicLinkDark href='#' external>اطلب استشارة مجانية</DynamicLinkDark>
-            <DynamicLink href={"#"} external >
-              تعرف علينا
+            <DynamicLinkDark href='#' external>{t('consultation')}</DynamicLinkDark>
+            <DynamicLink href={"#"} external>
+              {t('knowMore')}
             </DynamicLink>
           </div>
         </motion.div>
@@ -36,14 +50,29 @@ const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           className='lg:w-2/3 md:1/3 min-h-[70vh] relative overflow-hidden max-lg:hidden  '>
-          <Image src={'/images/circles.svg'} width={1000} height={1000} alt='about' className='animate-pulse object-cover absolute top-0 -end-[10%]' />
-          <Image src={'/images/person.png'} width={450} height={450} alt='about' className='absolute bottom-0 end-[17%]' />
+          <Image 
+            src={'/images/circles.svg'} 
+            width={1000} 
+            height={1000} 
+            alt='about' 
+            className='animate-pulse object-cover absolute top-0 -end-[10%]' 
+          />
+          {data?.[`image_${locale}`] && (
+            <Image 
+              src={data[`image_${locale}`]} 
+              width={450} 
+              height={450} 
+              alt='about' 
+              className='absolute bottom-0 end-[17%] object-contain object-bottom' 
+            />
+          )}
         </motion.div>
 
       </div>
 
 
     </section>
+    :null
   )
 }
 

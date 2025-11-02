@@ -3,14 +3,16 @@
 
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 
 const DynamicLink = ({ href, children, className, external = false }) => {
+  const locale = useLocale();
   const baseClasses =
     "group border border-primary-800 text-primary-900 lg:text-base text-sm bg-white lg:py-3 lg:px-9 py-2 px-6 rounded-md flex items-center justify-center gap-2 w-fit hover:bg-primary-800 hover:text-white hover:gap-3 transition-all duration-700";
 
   const svgIcon = (
     <svg
-      className="text-primary-900 group-hover:text-white group-hover:rotate-45 transition-all duration-700"
+      className={`text-primary-900 group-hover:text-white group-hover:rotate-45 transition-all duration-700 ${locale !== 'ar' ? 'rotate-180' : ''}`}
       width={18}
       height={14}
       viewBox="0 0 18 14"

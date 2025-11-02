@@ -1,5 +1,68 @@
 {
-  "home": "Anasayfa",
-  "about": "Hakkında",
-  "contact": "İletişim"
+  "navigation": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "services": "Hizmetlerimiz",
+    "works": "Çalışmalarımız",
+    "pricing": "Fiyatlandırma",
+    "products": "Ürünlerimiz",
+    "articles": "Makaleler"
+  },
+  "hero": {
+    "badge": "Projeniz Üzerinde Çalışmaya Hazırız",
+    "title": "Çünkü projenizin başarısı bir yolculuktur ve ilk adımı ",
+    "titleHighlight": "Subcode",
+    "titleSuffixes": [
+      " başarınız burada başlar... bizimle başlar",
+      " başarınızda yanınızdayız",
+      " fikirlerinizin gerçeğe dönüştüğü yer",
+      " dijital geleceği birlikte inşa ediyoruz",
+      " teknolojide yılların deneyimi",
+      " işiniz için yenilikçi çözümler"
+    ],
+    "description": "Subcode olarak, her fikrin başarısının doğru bir dijital adımla başladığına inanıyoruz. Bu yüzden size vizyonunuzu gerçeğe dönüştürmenize ve işinizi güvenle büyütmenize yardımcı olacak yenilikçi, hızlı ve güvenli çözümler sunuyoruz.",
+    "ctaPrimary": "Hemen Projenizi Başlatın",
+    "ctaSecondary": "İletişime Geçin"
+  },
+  "about": {
+    "title":"Hakkımızda",
+  "consultation": "Ücretsiz Danışma Talep Edin",
+  "knowMore": "Bizi Tanıyın"
+},
+  "services": {
+    "title": "Hizmetlerimiz",
+    "description": "İşinizi büyütmenize ve dijital varlığınızı geliştirmenize yardımcı olan yenilikçi çözümler sunuyoruz. Somut sonuçlar garanti eden uzmanlık sunuyoruz.",
+    "more": "Hizmetlerimizi Keşfedin",
+    "detailes": "Hizmet Detayları"
+  },
+  "marquee": [
+    "Kullanımı Kolay",
+    "Kolay Erişim",
+    "7/24 Destek",
+    "Yüksek Hız"
+  ],
+  "works":{
+    "title":"Çalışmalarımız",
+    "description":"Üstlendiğimiz her projede, büyümenize ve rakiplerinizden sıyrılmanızı sağlayacak güçlü bir dijital varlığa ulaşmanıza yardımcı olacak yenilikçi çözümler sunmaya odaklanıyoruz.",
+    "detailes":"Çalışma Detayları"
+  },
+  "team": {
+    "title": "Ekibimiz",
+    "description": "Anlamlı işler yaratma tutkusuyla bir araya gelmiş, tasarımcılar, düşünürler ve yenilikçilerden oluşan çeşitli bir grubuz."
+
+  },
+  "clientReviews": {
+    "title": "Müşteri Yorumları",
+    "description": "Bir sonraki başarı hikayesi siz olun"
+  },
+  "counters": {
+    "title": "Başarıya Tanık Olun: Büyüme Rakamlarla Kanıtlanıyor!",
+    "description": "İşte bizimle birlikte yaptığımız projelerin etkilerini ve bunun şirketlerin somut sonuçları için kanıtını bulabilirsiniz.",
+    "items": [
+      { "number": 660, "label": "Proje" },
+      { "number": 120, "label": "Müşteri" },
+      { "number": 15, "label": "Yıllık Deneyim" },
+      { "number": 50, "label": "Ödül" }
+    ]
+  }
 }

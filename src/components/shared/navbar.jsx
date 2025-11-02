@@ -10,12 +10,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useState, useRef, useEffect } from "react";
 import { motion as framerMotion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// Import shadcn/ui components
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Products data
 const PRODUCTS = [
@@ -46,72 +53,119 @@ const PRODUCTS = [
 ];
 
 // Navigation links configuration
-const NAV_LINKS = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/about", label: "من نحن" },
-  { href: "/services", label: "خدماتنا" },
-  { href: "/works", label: "اعمالنا" },
-  { href: "/prices", label: "الاسعار" },
-  { href: "/products", label: "منتجاتنا", hasDropdown: true },
-  { href: "/blogs", label: "المقالات" },
-];
 
-// Re-usable accordion component
-const Accordion = AccordionPrimitive.Root;
 
-const AccordionItem = React.forwardRef(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item
-    ref={ref}
-    className={cn("border-b", className)}
-    {...props}
-  />
-));
-AccordionItem.displayName = "AccordionItem";
+// Mobile menu accordion item component
+const MobileNavItem = ({ href, label, hasDropdown, children }) => {
+  const t = useTranslations("products");
+  
+  if (hasDropdown) {
+    return (
+      <AccordionItem value={href} className="border-b-0">
+        <AccordionTrigger className="py-3 px-4 hover:bg-gray-50 rounded-md text-left [&[data-state=open]>svg]:rotate-180">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold">{label}</span>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className="pb-0 pt-2">
+          <div className="space-y-1 ps-4">
+            {PRODUCTS.map((category, index) => (
+              <div key={index} className="space-y-1">
+                <h4 className="font-medium text-primary-900 text-sm py-1">
+                  {category.category}
+                </h4>
+                <ul className="space-y-1">
+                  {category.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 py-1.5 px-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    );
+  }
 
-const AccordionTrigger = React.forwardRef(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
-      {...props}
+  return (
+    <Link
+      href={href}
+      className="block py-3 px-4 font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+      onClick={() => setIsOpen(false)}
     >
-      {children}
-      <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-));
-AccordionTrigger.displayName = "AccordionTrigger";
-
-const AccordionContent = React.forwardRef(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
-    ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    {...props}
-  >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
-));
-AccordionContent.displayName = "AccordionContent";
+      {label}
+    </Link>
+  );
+};
 
 const Navbar = () => {
   const locale = useLocale();
+  const t = useTranslations("navigation");
   const [isOpen, setIsOpen] = useState(false);
   const [isProductsHovered, setIsProductsHovered] = useState(false);
   const dropdownRef = useRef(null);
+  const NAV_LINKS = [
+    { href: "/", label: t("home") },
+    { href: "/about", label: t("about") },
+    { href: "/services", label: t("services") },
+    { href: "/works", label: t("works") },
+    { href: "/prices", label: t("pricing") },
+    { href: "/products", label: t("products"), hasDropdown: true },
+    { href: "/blogs", label: t("articles") },
+  ];
 
-  // Close dropdown when clicking outside
+  // Close dropdown with delay
   useEffect(() => {
+    // Only run this effect when isProductsHovered is true
+    if (!isProductsHovered) return;
+    
+    let timeoutId;
+    const dropdownElement = dropdownRef.current;
+    
+    const handleMouseLeave = () => {
+      // Set a timeout before closing the dropdown
+      timeoutId = setTimeout(() => {
+        setIsProductsHovered(false);
+      }, 500); // 500ms delay before closing
+    };
+    
+    const handleMouseEnter = () => {
+      // Clear the timeout if user hovers back into the dropdown
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+    
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownElement && !dropdownElement.contains(event.target)) {
         setIsProductsHovered(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    
+    if (dropdownElement) {
+      dropdownElement.addEventListener('mouseleave', handleMouseLeave);
+      dropdownElement.addEventListener('mouseenter', handleMouseEnter);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      if (dropdownElement) {
+        dropdownElement.removeEventListener('mouseleave', handleMouseLeave);
+        dropdownElement.removeEventListener('mouseenter', handleMouseEnter);
+      }
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isProductsHovered]); 
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -151,11 +205,16 @@ const Navbar = () => {
               key={href}
               className="relative"
               onMouseEnter={() => hasDropdown && setIsProductsHovered(true)}
-              onMouseLeave={() => !dropdownRef.current?.matches(':hover') && setIsProductsHovered(false)}
+              onMouseLeave={() => {
+                // Don't close immediately, let the dropdown's own handler manage the delay
+                if (!dropdownRef.current?.matches(':hover')) {
+                  // The dropdown's mouseleave handler will handle the delay
+                }
+              }}
             >
               <Link
                 href={href}
-                className="text-sm font-semibold capitalize transition-all duration-300 hover:text-primary-800 flex items-center gap-1"
+                className=" font-semibold capitalize transition-all duration-300 hover:text-primary-800 flex items-center gap-1"
               >
                 {label}
                 {hasDropdown && (
@@ -169,18 +228,18 @@ const Navbar = () => {
                   {isProductsHovered && (
                     <framerMotion.div
                       ref={dropdownRef}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="fixed left-0 right-0 mt-6 w-[70%] mx-auto bg-white shadow-xl rounded-xl p-6 z-50"
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5 }}
+                      className="fixed left-0 right-0 mt-6 w-[70%] mx-auto bg-primary-800 shadow-xl rounded-xl p-6 z-50"
                       onMouseEnter={() => setIsProductsHovered(true)}
                       onMouseLeave={() => setIsProductsHovered(false)}
                     >
                       <div className="grid grid-cols-3 gap-6">
                         {PRODUCTS.map((category, index) => (
                           <div key={index} className="space-y-2">
-                            <h4 className="font-semibold text-primary-900 mb-2 ">
+                            <h4 className="font-semibold text-white mb-2 ">
                               {category.category}
                             </h4>
                             <ul className="space-y-2">
@@ -188,7 +247,7 @@ const Navbar = () => {
                                 <li key={itemIndex}>
                                   <Link
                                     href={item.href}
-                                    className="block px-3 py-1.5 text-sm text-gray-700 cursor-pointer   transition-colors"
+                                    className="block px-3 py-1.5 text-sm text-white cursor-pointer   transition-colors"
                                     onClick={handleLinkClick}
                                   >
                                     {item.name}
@@ -223,54 +282,19 @@ const Navbar = () => {
                 <FiMenu size={18} />
               </button>
             </SheetTrigger>
-            <SheetContent side={locale === "ar" ? "right" : "left"} className="overflow-auto">
+            <SheetContent side={locale === "ar" ? "right" : "left"} className="overflow-auto ">
               <SheetHeader>
                 <SheetTitle className=""></SheetTitle>
               </SheetHeader>
               <nav className="mt-4">
-                <Accordion type="single" collapsible className="w-full space-y-2">
+                <Accordion type="single" collapsible className="w-full space-y-1">
                   {NAV_LINKS.map(({ href, label, hasDropdown }) => (
-                    <div key={href} className="w-full">
-                      {hasDropdown ? (
-                        <AccordionItem value={href}>
-                          <AccordionTrigger className="text-sm font-semibold capitalize py-3 px-4 hover:bg-gray-50 rounded-md w-full ">
-                            {label}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-2 ps-4">
-                              {PRODUCTS.map((category, index) => (
-                                <div key={index} className="space-y-1">
-                                  <h4 className="font-medium text-primary-900 ">
-                                    {category.category}
-                                  </h4>
-                                  <ul className="space-y-1 mt-1">
-                                    {category.items.map((item, itemIndex) => (
-                                      <li key={itemIndex}>
-                                        <Link
-                                          href={item.href}
-                                          className="block py-1.5 px-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md  transition-colors"
-                                          onClick={handleLinkClick}
-                                        >
-                                          {item.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ) : (
-                        <Link
-                          href={href}
-                          onClick={handleLinkClick}
-                          className="block w-full py-3 px-4 text-sm font-semibold capitalize transition-all duration-300 hover:bg-gray-50 rounded-md "
-                        >
-                          {label}
-                        </Link>
-                      )}
-                    </div>
+                    <MobileNavItem 
+                      key={href}
+                      href={href}
+                      label={label}
+                      hasDropdown={hasDropdown}
+                    />
                   ))}
                 </Accordion>
               </nav>
@@ -283,3 +307,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+

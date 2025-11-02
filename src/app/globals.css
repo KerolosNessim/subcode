@@ -231,3 +231,12 @@ a{
 .animate-marquee-vertical {
   animation: marquee-y var(--duration, 40s) linear infinite;
 }
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -1,16 +1,27 @@
-import React from 'react'
+import { getLocale } from 'next-intl/server'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
-import { useLocale } from 'next-intl'
 import ClientCard from './client-card'
+import { getData } from '@/services/fetch-data'
 
-const ClientSlider = () => {
-  const locale = useLocale()
+const ClientSlider = async  () => {
+  const locale = await getLocale()
+
+  let reviews = []
+  const res = await getData({ url: `/testimonials` })
+  if (res?.code==200) {
+    reviews = res?.data?.data
+  }
+  else {
+    reviews = []
+  }
   return (
+    reviews?.length>0 &&
     <Carousel className={"lg:space-y-8 space-y-6"} opts={{ loop: true, direction: locale === "ar" ? "rtl" : "ltr", align: "start" }}>
-      <CarouselContent>
-        <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard /></CarouselItem>
-        <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard /></CarouselItem>
-        <CarouselItem className={"  md:basis-1/2 basis-full"}><ClientCard /></CarouselItem>
+        <CarouselContent>
+          {reviews?.map((review, index) => (
+            <CarouselItem key={index} className={"  md:basis-1/2 basis-full"}><ClientCard review={review}/></CarouselItem>
+          ))}
+
 
       </CarouselContent>
       <div className={`flex items-center justify-center gap-4 w-full ${locale === "ar" ? "flex-row-reverse" : "flex-row"}`}>

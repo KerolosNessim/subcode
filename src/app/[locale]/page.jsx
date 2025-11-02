@@ -18,7 +18,9 @@ export default function Home() {
       </div>
       <StackSection />
       <div className="py-20 bg-[url('/images/hero-bg.svg')] bg-center ">
+        <div className="my-10">
         <CustomMarquee />
+        </div>
         <WorksSection />
         <Counters />
         <BlogsSection />

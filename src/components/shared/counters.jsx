@@ -1,21 +1,28 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { getData } from "@/services/fetch-data";
+
 const Counters = () => {
+  const t = useTranslations("counters");
   const [startCount, setStartCount] = useState(false);
+  const [counters, setCounters] = useState([]);
   const sectionRef = useRef(null);
+
+  const title = t('title');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setStartCount(true);
-          observer.disconnect(); // يشتغل مرة واحدة بس
+          observer.disconnect();
         }
       },
-      { threshold: 0.3 } // 30% من العنصر لازم يظهر
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -25,21 +32,29 @@ const Counters = () => {
     return () => observer.disconnect();
   }, []);
 
-  const counters = [
-    { number: 660, label: "مشروع" },
-    { number: 120, label: "عميل" },
-    { number: 15, label: "سنة خبرة" },
-    { number: 50, label: "جائزة" },
-  ];
+  async function getCounters() {
+    const res = await getData({
+      url: "/success-numbers"
+    });
+    if(res?.code===200){
+      setCounters(res?.data?.data);
+    }
+    else{
+      setCounters([]);
+    }
+    
+  }
+
+  useEffect(() => {
+    getCounters();
+  }, []);
 
   return (
     <div className="lg:w-[60%] mx-auto max-lg:container" ref={sectionRef}>
       <h3 className="text-center text-2xl md:text-3xl font-bold text-white py-1.5 bg-gradient-to-l from-[#4F7E92B2]/80 to-70% to-[#16536E]/80">
-        شاهد النجاح: أرقام النجاح, نمو حقيقي!
+        {title}
       </h3>
-      <p className="text-gray-300 text-center text-xl mt-4">
-        إكتشف أثرنا وكيف يدفع نتائج ملموسة للشركات
-      </p>
+      <p className="text-center text-gray-200 lg:text-xl text-lg my-8">{t('description')}</p>
 
       {/* counters */}
       <div className="grid md:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 mt-4 place-items-center ">
@@ -51,7 +66,7 @@ const Counters = () => {
             transition={{ duration: 1, delay: i * 0.2 }}
             key={i} className="flex items-center gap-4">
             <Image
-              src="/images/counter.svg"
+              src={counter?.icon}
               alt="counter"
               width={100}
               height={100}
@@ -60,12 +75,12 @@ const Counters = () => {
             <div>
               <p className="text-center lg:text-5xl text-3xl font-bold text-primary-700">
                 {startCount ? (
-                  <CountUp end={counter.number} duration={2} />
+                  <CountUp end={counter?.number} duration={2} />
                 ) : (
                   0
                 )}
               </p>
-              <p className="text-primary-800 text-center">{counter.label}</p>
+              <p className="text-primary-800 text-center">{counter?.title}</p>
             </div>
           </motion.div>
         ))}

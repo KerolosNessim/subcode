@@ -7,7 +7,7 @@ import {
 import Autoplay from "embla-carousel-autoplay"
 import WorkCard from './work-card'
 import { useLocale } from "next-intl"
-const WorkSlider = () => {
+const WorkSlider = ({ data }) => {
   const locale = useLocale()
   return (
     <Carousel
@@ -18,9 +18,9 @@ const WorkSlider = () => {
       ]}
       opts={{ loop: true, direction: locale === "ar" ? "rtl" : "ltr" }}>
       <CarouselContent className={""}>
-        {Array.from({ length: 5 }).map((_, i) => (
+        {data?.map((item, i) => (
           <CarouselItem key={i} className={"basis-[80%] md:basis-1/2 lg:basis-1/3 py-4 pl-4"}>
-            <WorkCard />
+            <WorkCard data={item}  />
           </CarouselItem>
         ))}
       </CarouselContent>

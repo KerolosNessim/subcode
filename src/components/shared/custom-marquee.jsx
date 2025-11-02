@@ -1,14 +1,12 @@
 import Marquee from "react-fast-marquee";
 import * as motion from "motion/react-client";
 import { GiStarShuriken } from "react-icons/gi";
+import { useTranslations } from "next-intl";
 
 const CustomMarquee = () => {
-  const items = [
-    "سهل الاستخدام",
-    "سهولة الوصول",
-    "دعم متواصل",
-    "سرعة عالية",
-  ];
+  const t = useTranslations();
+  // Get the marquee array from translations
+  const items = t.raw('marquee');
 
   return (
     <motion.div
@@ -17,7 +15,7 @@ const CustomMarquee = () => {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1, delay: 1 }}
       viewport={{ once: true }}
-      className="overflow-hidden whitespace-nowrap bg-gradient-to-l from-[#4F7E92B2] to-50% to-[#16536E] -skew-y-1"
+      className="overflow-hidden whitespace-nowrap bg-gradient-to-l from-[#4F7E92B2] to-50% to-[#16536E] -skew-y-1  "
     >
       <Marquee autoFill={true} pauseOnHover={true} speed={70} >
         {[...items, ...items, ...items].map((text, idx) => (

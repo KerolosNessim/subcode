@@ -41,7 +41,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-   /* Blue */
+  /* Blue */
   --color-primary-50: #ebf8ff;
   --color-primary-100: #d2eeff;
   --color-primary-200: #a6e1ff;
@@ -52,7 +52,7 @@
   --color-primary-700: #0b7cb2;
   --color-primary-800: #0a5d88;
   --color-primary-900: #083f5d;
-  --color-primary-950: #104F6A;
+  --color-primary-950: #104f6a;
   /* White */
   --color-white-50: #ffffff;
   --color-white-100: #fefefe;
@@ -84,19 +84,19 @@
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   @keyframes marquee {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
   @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
+    from {
+      transform: translateY(0);
     }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
     }
   }
 }
@@ -135,6 +135,80 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
+
+/* React Image Gallery Styles */
+/* Main gallery container */
+.image-gallery {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* Main image styling */
+.image-gallery-slide img {
+  border-radius: 0.5rem;
+  max-height: 500px;
+  width: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+
+}
+
+/* Thumbnail container */
+.image-gallery-thumbnails-wrapper {
+  padding: 0.75rem;
+
+}
+
+/* Individual thumbnail */
+.image-gallery-thumbnail {
+  border: 2px solid transparent !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+  opacity: 0.7;
+  width: 24.5% !important;
+}
+
+.image-gallery-thumbnail:hover,
+.image-gallery-thumbnail.active {
+  border-color: var(--color-primary-700) !important;
+  opacity: 1;
+}
+
+.image-gallery-thumbnail img {
+  border-radius: 0.25rem !important;
+  width: auto !important;
+  object-fit: cover;
+}
+
+/* Navigation buttons */
+.image-gallery-icon {
+  color: white !important;
+  filter: drop-shadow(0 2px 4px var(--color-primary-700)) !important;
+  transition: all 0.3s ease !important;
+  padding: 20px !important;
+}
+
+.image-gallery-icon:hover {
+  color: var(--color-primary-700) !important;
+  transform: scale(1.1);
+}
+
+.image-gallery-left-nav,
+.image-gallery-right-nav {
+  display: none;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-gallery-slide img {
+    max-height: 450px !important;
+  }
+}
+
+
+
 
 .dark {
   --background: oklch(0.145 0 0);
@@ -196,7 +270,7 @@
   @apply w-[95%] mx-auto lg:w-[90%];
 }
 
-a{
+a {
   cursor: pointer;
 }
 /* Chrome, Edge, Safari */
@@ -215,13 +289,21 @@ a{
 }
 
 @keyframes marquee-x {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes marquee-y {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100%); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 .animate-marquee {

@@ -19,17 +19,18 @@ import WorkSlider from '@/components/shared/work-slider'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getData } from '@/services/fetch-data'
+import { FaRegCircleCheck } from 'react-icons/fa6'
 
 const SinglrServicePage = async ({ params }) => {
   const { slug } = params;
   const locale = await getLocale();
   const t = await getTranslations('services');
-  const b=await getTranslations();
+  const b = await getTranslations();
 
   let service = null;
   try {
     const res = await getData({
-      url:`/services/${slug}`,
+      url: `/services/${slug}`,
     });
     if (res?.code === 200 && res?.data?.data) {
       service = res.data.data;
@@ -68,6 +69,14 @@ const SinglrServicePage = async ({ params }) => {
                 <p className='text-gray-200 leading-8 text-sm'>
                   {service?.description}
                 </p>
+                <ul className='flex flex-col gap-2'>
+                  {service?.features?.map((item, i) => (
+                    <li key={i} className='md:text-lg text-sm flex items-center gap-1 '>
+                      <FaRegCircleCheck size={16} className='text-primary-900' />
+                      <p>{item?.title}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
               {/* image */}
               <div className='lg:w-1/2 w-full relative py-12 z-1'>

@@ -61,7 +61,50 @@
   "works":{
     "title":"Çalışmalarımız",
     "description":"Üstlendiğimiz her projede, büyümenize ve rakiplerinizden sıyrılmanızı sağlayacak güçlü bir dijital varlığa ulaşmanıza yardımcı olacak yenilikçi çözümler sunmaya odaklanıyoruz.",
-    "detailes":"Çalışma Detayları"
+    "detailes":"Çalışma Detayları",
+    "all":"Tümü"
+  },
+  "singleWork": {
+    "category": "Kategori",
+    "visit_website": "Siteyi Ziyaret Et",
+    "tabs": {
+      "description": "Açıklama",
+      "features": "Özellikler",
+      "reviews": "Müşteri Yorumları"
+    },
+    "tech":"Tecnolojiler Kullanıldı",
+    "packages": "İşiniz için en uygun planı seçin",
+"packagesDescription": "İster yeni başlıyor olun ister hızla büyüyor olun, Penny size uygun bir plana sahiptir. Dijital kataloğunuzu oluşturun, bağlantınızı paylaşın ve siparişleri doğrudan WhatsApp üzerinden alın — teknik beceriye gerek yok."
+  },
+  "footer": {
+    "title":"Potansiyelini ortaya çıkar ve bizimle iletişime geç, projenize başlayalım.",
+    "boostProfits": "Kârlarınızı artırın... Hemen projenize başlayın",
+    "contactUs": "İletişime Geçin",
+    "discoverPricing": "Fiyatları Keşfedin",
+    "unleashPotential": "Potansiyelinizi ortaya çıkarın ve projenize başlamak için bizimle iletişime geçin",
+    "discoverMore": "Daha Fazla Keşfedin",
+    "blog": "Blog",
+    "pricing": "Fiyatlandırma",
+    "services": "Önemli Bağlantılar",
+    "faq": "SSS",
+    "ourNumbers": "Rakamlarımız",
+    "allRightsReserved": "Tüm hakları saklıdır",
+    "privacyPolicy": "Gizlilik Politikası",
+    "termsOfService": "Kullanım Koşulları"
+  },
+  "pricing": {
+    "title": "İşiniz İçin Mükemmel Planı Seçin",
+    "subtitle": "Yeni başlıyor ya da hızlı büyüyor olun, ihtiyaçlarınıza uygun bir planımız var. Dijital kataloğunuzu oluşturun, bağlantınızı paylaşın ve siparişleri doğrudan WhatsApp üzerinden alın — teknik beceri gerekmeksizin.",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "subscribe": "Pakete Abone Ol",
+    "custom_plan_title": "Projenize özel... özelleştirilmiş bir plan seçin",
+    "custom_plan_description": "Hedeflerinize ve bütçenize uygun, projenizin başarıya ulaşması için ihtiyaç duyduğu çözümleri sunan esnek ve özelleştirilmiş paketler sunuyoruz.",
+    "custom_plan_cta": "Hemen Planınızı Alın",
+    "features_title": "İhtiyaçlarınıza Özel Olarak Tasarlandı",
+    "details": "Detaylar",
+    "per_month": "TL/aylık",
+    "per_year": "TL/yıllık"
   },
   "team": {
     "title": "Ekibimiz",
@@ -86,7 +129,8 @@
     "title": "Makaleler",
     "description": "Burada, değişiklikleri takip etmenize ve rakiplerinizden ayırmak için size stratejiler, fikirler ve modern araçlar sunan uzman makaleler bulabilirsiniz",
     "more": "Makaleleri Keşfedin",
-    "detailes":"Makale Detayları"
+    "detailes":"Makale Detayları",
+    "all":"Tümü"
   },
       "newsletter": {
   "validation": "E-posta geçerli değil",

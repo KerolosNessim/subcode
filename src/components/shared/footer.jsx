@@ -4,12 +4,15 @@ import DynamicLink from './dynamic-link'
 import * as motion from "motion/react-client"
 import Image from 'next/image'
 import Newsletter from './newsletter'
-import { Link } from '@/i18n/navigation'
 import ReactCountryFlag from 'react-country-flag'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa6";
 import LocaleSwitcher from './locale-switcher'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 const Footer = () => {
+  const t = useTranslations('footer')
+  const b = useTranslations()
   return (
     <footer className=' container  py-10 relative overflow-hidden z-[2]'>
       <Image src="/images/waves-circle.svg" alt="footer" width={1000} height={1000} className='opacity-50 size-60 object-cover absolute top-0 end-0 z-[-1]' />
@@ -21,13 +24,14 @@ const Footer = () => {
         viewport={{ once: true }}
         transition={{ duration: 1 }}
         className='bg-white px-6 py-10 border-y-2 border-gray-500 flex items-center justify-between lg:w-3/4 mx-auto max-md:flex-col gap-6'>
-        <p className='text-gray-100 text-2xl font-semibold'>عزز أرباحك .. إبدا مشروعك الأن</p>
+        <p className='text-gray-100 text-2xl font-semibold'>{t('boostProfits')}</p>
         {/* links */}
-        <div className='flex items-center  gap-4 '>
-          <DynamicLinkDark href='#' external>تواصل معنا</DynamicLinkDark>
-          <DynamicLink href={"#"} external >
-            إكتشف الأسعار
-          </DynamicLink></div>
+        <div className='flex items-center gap-4'>
+          <DynamicLinkDark href='#' external>{t('contactUs')}</DynamicLinkDark>
+          <DynamicLink href={"/prices"}>
+            {t('discoverPricing')}
+          </DynamicLink>
+        </div>
       </motion.div>
       {/* footer */}
       <motion.div
@@ -37,51 +41,56 @@ const Footer = () => {
         transition={{ duration: 1 }}
         className='py-10 border-b-2 border-gray-500 lg:w-3/4 mx-auto flex items-start lg:justify-between justify-center md:gap-6 gap-10 max-lg:flex-wrap '>
         {/* info and newsletter */}
-        <div className='text-center space-y-4 max-lg:w-full'>
+        <div className='text-center space-y-4 max-lg:w-full lg:max-w-1/3'>
           {/* image */}
           <div className='size-20 bg-black rounded-full flex items-center justify-center mx-auto'>
             <Image src="/images/logo.png" alt="logo" width={100} height={100} className='w-1/2 object-cover' />
           </div>
           {/* title */}
-          <h3 className=' text-gray-400 font-bold'>أطلق العنان لأمكانياتك وأتصل بنا نبدأ مشروعك</h3>
+          <h3 className=' text-gray-400 font-bold'>{t('title')}</h3>
           {/* input */}
           <Newsletter />
         </div>
         {/* links */}
         <div className=' space-y-2'>
-          <h3 className='text-primary-800 font-semibold'>اكتشف المزيد</h3>
+          <h3 className='text-primary-800 font-semibold'>{t('discoverMore')}</h3>
           <ul className='space-y-2'>
             <li>
-              <Link className='font-light hover:font-normal block '>
-                المدونة
+              <Link href="/blogs" className='font-light hover:font-normal block'>
+                {b('navigation.articles')}
               </Link>
             </li>
             <li>
-              <Link className='font-light hover:font-normal block '>
-                قصص العملاء
+              <Link href="/customer-stories" className='font-light hover:font-normal block'>
+                {t('pricing')}
               </Link>
             </li>
           </ul>
         </div>
         {/* links */}
-        <div className=' space-y-2'>
-          <h3 className='text-primary-800 font-semibold'>الوظائف المتاحة</h3>
+        <div className='space-y-2'>
+          <h3 className='text-primary-800 font-semibold'>{t('services')}</h3>
           <ul className='space-y-2'>
             <li>
-              <Link className='font-light hover:font-normal block '>
-                اتصل بنا
+              <Link href="/services" className='font-light hover:font-normal block'>
+                {b('navigation.services')}
               </Link>
             </li>
             <li>
-              <Link className='font-light hover:font-normal block '>
-                الاسئلة الشائعة
+              <Link href="/works" className='font-light hover:font-normal block'>
+                {b('navigation.works')}
+              </Link>
+            </li>
+            <li>
+              <Link href="/products" className='font-light hover:font-normal block'>
+                {b('navigation.products')}
               </Link>
             </li>
           </ul>
         </div>
         {/* numbers */}
         <div className=' space-y-2'>
-          <h3 className='text-primary-800 font-semibold'>أرقامنا</h3>
+          <h3 className='text-primary-800 font-semibold'>{t('ourNumbers')}</h3>
           <ul className='space-y-2' >
             <li>
               <a href="#" className='flex items-center gap-2'>
@@ -128,7 +137,8 @@ const Footer = () => {
         className='pt-10 lg:w-3/4 mx-auto flex items-center justify-between max-md:flex-col max-md:gap-6 '>
         {/* socials */}
         <div className='space-y-2'>
-          <p className='text-primary-800 font-semibold max-md:text-center'>تواصل معنا</p>
+          <p className='text-primary-800 font-semibold max-md:text-center'>{t('contactUs')}</p>
+
           <div className='flex items-center gap-3'>
             <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
               <FaInstagram size={24} />

@@ -15,6 +15,7 @@ const BlogsPage =async () => {
   const b = await getTranslations();
   const t = await getTranslations("blogs");
   let blogs = []
+  let allBlogs = []
   const res = await getData({
     url:"/category-with-blogs"
   })
@@ -23,6 +24,15 @@ const BlogsPage =async () => {
   }
   else{
     blogs = []
+  }
+  const res2 = await getData({
+    url:"/all-blog"
+  })
+  if (res2?.code == 200) {
+    allBlogs = res2?.data?.data
+  }
+  else{
+    allBlogs = []
   }
   
   return (
@@ -43,12 +53,16 @@ const BlogsPage =async () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           className='container'>
-          <Tabs dir={locale === "ar" ? "rtl" : "ltr"} defaultValue={blogs?.[0]?.slug} className="w-full space-y-12">
+          <Tabs dir={locale === "ar" ? "rtl" : "ltr"} defaultValue={"all"} className="w-full space-y-12">
             <TabsList className="bg-[#EBEBEB] mx-auto text-gray-100 h-fit  p-2 md:rounded-full rounded-3xl max-md:flex-wrap">
+              <TabsTrigger value="all" className={tabStyle}>{t('all')}</TabsTrigger>
               {blogs?.map((item) => (
                 <TabsTrigger key={item?.id} value={item?.slug} className={tabStyle}>{item?.name}</TabsTrigger>
               ))}
             </TabsList>
+            <TabsContent value="all">
+              <BlogsLayout blogs={allBlogs} />
+            </TabsContent>
             {blogs?.map((item) => (
               <TabsContent key={item?.id} value={item?.slug}>
                 <BlogsLayout blogs={item?.blogs} />

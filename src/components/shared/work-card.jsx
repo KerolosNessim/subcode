@@ -3,7 +3,7 @@ import React from 'react'
 import DynamicLink from './dynamic-link'
 import { useTranslations } from 'next-intl'
 
-const WorkCard = ({ data }) => {
+const WorkCard = ({ data, product }) => {
 const t = useTranslations("works")
   return (
     <div className='bg-white rounded-4xl shadow-md overflow-hidden'>
@@ -16,7 +16,7 @@ const t = useTranslations("works")
         <p className=' leading-6 text-gray-200 line-clamp-3'>
           {data?.description}
         </p>
-        <DynamicLink href={'/works/slug'}  className={"mx-auto"}>
+        <DynamicLink href={product ? `/products/${data?.slug}` : `/works/${data?.slug}`}  className={"mx-auto"}>
           {t("detailes")}
         </DynamicLink>
       </div>

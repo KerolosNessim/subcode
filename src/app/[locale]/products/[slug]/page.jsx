@@ -12,6 +12,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { FaCheckCircle } from 'react-icons/fa'
 import { GoLock } from "react-icons/go"
 import { IoSettingsOutline } from "react-icons/io5"
 import { SlRocket } from "react-icons/sl"
@@ -19,7 +20,7 @@ import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css";
 
 import Markdown from 'react-markdown'
-const SingleWorkPage = () => {
+const SingleProductPage = () => {
   const locale = useLocale();
   const b = useTranslations()
   const { slug } = useParams();
@@ -28,7 +29,7 @@ const SingleWorkPage = () => {
   const [images, setImages] = useState([])
   async function getSingleWork() {
     const res = await getData({
-      url: `/projects/${slug}`,
+      url: `/websites/${slug}`,
     })
     console.log(res)
     if (res?.code == 200) {
@@ -163,7 +164,7 @@ const SingleWorkPage = () => {
                 transition={{ duration: 1 }}
               >
                 {
-                  singleWork?.review_projects?.length>0 &&
+                  singleWork?.review_projects?.length > 0 &&
                   <ClientClientSlider reviews={singleWork?.review_projects} />
                 }
               </motion.div>
@@ -171,11 +172,62 @@ const SingleWorkPage = () => {
           </Tabs>
         </motion.div>
         {/* marquee */}
-        <TechMarquee title={b('singleWork.tech')} data={singleWork?.technologies}/>
+        <TechMarquee title={b('singleWork.tech')} data={singleWork?.technologies} />
+        {/* package */}
+        <section className='container'>
+          {/* section header */}
+          <div className='space-y-6 text-center'>
+            <motion.h2
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className='lg:text-4xl md:text-3xl text-2xl font-bold text-gray-100 '>{b('singleWork.packages')}</motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className=' lg:text-2xl text-gray-400 lg:leading-10 font-light'>{b('singleWork.packagesDescription')}</motion.p>
+          </div>
 
+          {/* cards */}
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-20'>
+            {
+              singleWork?.subscriptions?.length > 0 &&
+              singleWork?.subscriptions?.map((item, index) => (
+                <motion.div
+                  initial={{ opacity: 0, y: -30, scale: .8 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: index * 0.2 }}
+                  key={index}
+                  className='odd:bg-white-50 even:bg-primary-800 shadow-lg rounded-3xl p-8 odd:text-primary-800 even:text-white even:scale-110 even:shadow-xl even:bg-[url("/images/card-pattern.svg")] space-y-10 group'>
+                  <h3 className=''>{item?.name}</h3>
+                  <h4 className='text-4xl font-bold '>{Number(item?.price).toFixed(2)} $ <span className="text-gray-400 group-even:text-white text-xl">/ {item?.type_name}</span></h4>
+                  <p className=' '>{item?.description}</p>
+                  <div className='h-[2px] w-full bg-primary-800 group-even:bg-white-50'></div>
+                  <ul className='space-y-6'>
+                    {
+                      item?.features?.length > 0 &&
+                      item?.features?.map((feature, index) => (
+                        <li key={index} className='flex items-center gap-2 '>
+                          <FaCheckCircle className='text-primary-800 group-even:text-white size-5' />
+                          <p>{feature}</p>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                  <DynamicLink href={'#'} external className={"w-full border-none rounded-full shadow-xl hover:shadow hover:shadow-white"}>إشترك في الباقة</DynamicLink>
+                </motion.div>
+              ))
+            }
+          </div>
+
+        </section>
       </div>
     </main>
   )
 }
 
-export default SingleWorkPage
+export default SingleProductPage

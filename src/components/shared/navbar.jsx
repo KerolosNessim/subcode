@@ -23,42 +23,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { getData } from "@/services/fetch-data";
 
-// Products data
-const PRODUCTS = [
-  {
-    category: "البرمجيات",
-    items: [
-      { name: "برامج إدارية", href: "/products/erp" },
-      { name: "مواقع إلكترونية", href: "/products/websites" },
-      { name: "تطبيقات موبايل", href: "/products/mobile-apps" },
-    ],
-  },
-  {
-    category: "التصميم",
-    items: [
-      { name: "شعارات", href: "/products/logos" },
-      { name: "هويات بصرية", href: "/products/branding" },
-      { name: "تصميم واجهات", href: "/products/ui-ux" },
-    ],
-  },
-  {
-    category: "التسويق",
-    items: [
-      { name: "إدارة وسائل التواصل", href: "/products/social-media" },
-      { name: "إعلانات ممولة", href: "/products/ads" },
-      { name: "تحسين محركات البحث", href: "/products/seo" },
-    ],
-  },
-];
+
 
 // Navigation links configuration
 
 
 // Mobile menu accordion item component
-const MobileNavItem = ({ href, label, hasDropdown, children }) => {
-  const t = useTranslations("products");
-  
+const MobileNavItem = ({ href, label, hasDropdown, children, products }) => {
+
+
   if (hasDropdown) {
     return (
       <AccordionItem value={href} className="border-b-0">
@@ -69,26 +44,12 @@ const MobileNavItem = ({ href, label, hasDropdown, children }) => {
         </AccordionTrigger>
         <AccordionContent className="pb-0 pt-2">
           <div className="space-y-1 ps-4">
-            {PRODUCTS.map((category, index) => (
-              <div key={index} className="space-y-1">
+            {products?.map((category, index) => (
+              <Link href={`/products/${category?.slug}`} key={index} className="space-y-1">
                 <h4 className="font-medium text-primary-900 text-sm py-1">
-                  {category.category}
+                  {category?.name}
                 </h4>
-                <ul className="space-y-1">
-                  {category.items.map((item, itemIndex) => (
-                    <li key={itemIndex}>
-                      <Link
-                        href={item.href}
-                        className="flex items-center gap-2 py-1.5 px-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md transition-colors"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </Link>
             ))}
           </div>
         </AccordionContent>
@@ -113,6 +74,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProductsHovered, setIsProductsHovered] = useState(false);
   const dropdownRef = useRef(null);
+  const [products, setProducts] = useState([]);
   const NAV_LINKS = [
     { href: "/", label: t("home") },
     { href: "/about", label: t("about") },
@@ -123,40 +85,56 @@ const Navbar = () => {
     { href: "/blogs", label: t("articles") },
   ];
 
+  async function getProducts() {
+    const res = await getData({
+      url: "/websites",
+    });
+    if (res?.code == 200) {
+      setProducts(res?.data?.data);
+    }
+    else {
+      setProducts([]);
+    }
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   // Close dropdown with delay
   useEffect(() => {
     // Only run this effect when isProductsHovered is true
     if (!isProductsHovered) return;
-    
+
     let timeoutId;
     const dropdownElement = dropdownRef.current;
-    
+
     const handleMouseLeave = () => {
       // Set a timeout before closing the dropdown
       timeoutId = setTimeout(() => {
         setIsProductsHovered(false);
       }, 500); // 500ms delay before closing
     };
-    
+
     const handleMouseEnter = () => {
       // Clear the timeout if user hovers back into the dropdown
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
     };
-    
+
     const handleClickOutside = (event) => {
       if (dropdownElement && !dropdownElement.contains(event.target)) {
         setIsProductsHovered(false);
       }
     };
-    
+
     if (dropdownElement) {
       dropdownElement.addEventListener('mouseleave', handleMouseLeave);
       dropdownElement.addEventListener('mouseenter', handleMouseEnter);
       document.addEventListener('mousedown', handleClickOutside);
     }
-    
+
     return () => {
       if (dropdownElement) {
         dropdownElement.removeEventListener('mouseleave', handleMouseLeave);
@@ -165,7 +143,7 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [isProductsHovered]); 
+  }, [isProductsHovered]);
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -237,25 +215,13 @@ const Navbar = () => {
                       onMouseLeave={() => setIsProductsHovered(false)}
                     >
                       <div className="grid grid-cols-3 gap-6">
-                        {PRODUCTS.map((category, index) => (
-                          <div key={index} className="space-y-2">
-                            <h4 className="font-semibold text-white mb-2 ">
-                              {category.category}
+                        {products?.map((category, index) => (
+                          <Link href={`/products/${category?.slug}`} key={index} className="flex gap-2 items-center">
+                            <Image src={category?.main_image} alt={category?.name} width={100} height={100} className="object-cover object-center size-10 max-md:flex-shrink-0 " priority />
+                            <h4 className="font-semibold text-white text-xs">
+                              {category?.name}
                             </h4>
-                            <ul className="space-y-2">
-                              {category.items.map((item, itemIndex) => (
-                                <li key={itemIndex}>
-                                  <Link
-                                    href={item.href}
-                                    className="block px-3 py-1.5 text-sm text-white cursor-pointer   transition-colors"
-                                    onClick={handleLinkClick}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                          </Link>
                         ))}
                       </div>
                     </framerMotion.div>
@@ -289,11 +255,12 @@ const Navbar = () => {
               <nav className="mt-4">
                 <Accordion type="single" collapsible className="w-full space-y-1">
                   {NAV_LINKS.map(({ href, label, hasDropdown }) => (
-                    <MobileNavItem 
+                    <MobileNavItem
                       key={href}
                       href={href}
                       label={label}
                       hasDropdown={hasDropdown}
+                      products={products}
                     />
                   ))}
                 </Accordion>

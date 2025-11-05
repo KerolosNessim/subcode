@@ -27,14 +27,31 @@
   },
     "about": {
       "title": "About Us",
-    "consultation": "Request a Free Consultation",
-    "knowMore": "Learn More"
+      "consultation": "Request a Free Consultation",
+      "breadcrumbHome": "Home",
+      "breadcrumbAbout": "About Us",
+      "heroTitle": "Turn Your Idea into Digital Reality",
+      "heroSubtitle": "We develop innovative software solutions that help grow your business and keep up with the future",
+      "heroCta": "Start Your Project Now",
+    "knowMore": "Learn More",
+    "whyChooseUs": "Why Choose",
+    "companyName": "Subcode",
+    "aboutDescription": "We believe our success is tied to our clients' success. That's why we provide well-studied services, built on accurate analysis and professional execution that ensures your excellence in the target market.",
+    "benefits": [
+      "Free marketing consultation with our experts",
+      "Comprehensive coverage including website creation, identity design, and paid advertisements",
+      "An integrated social media strategy plan spanning 6 months to ensure you achieve your goals with precision"
+    ]
   },
     "services": {
     "title": "Our Services",
     "description": "Innovative solutions that help you grow your business and develop your digital presence. We offer specialized expertise that guarantees tangible results.",
     "more": "Discover Our Services",
-    "detailes":"Service Details"
+    "detailes": "Service Details",
+    "servicesLabel": "Our Services",
+    "whyChooseUs": "Why Choose Us as Your Partner in Software Development and Integrated Digital Solutions?",
+    "previousWorks": "Our Previous Works in {service}",
+    "worksDescription": "In every software project our team implements, we focus on providing innovative technical solutions that contribute to our clients' growth and establish a strong digital presence for them"
   },
   "marquee": [
      "Easy to Use",
@@ -64,5 +81,18 @@
       { "number": 15, "label": "Years of Experience" },
       { "number": 50, "label": "Awards" }
     ]
+  },
+    "blogs": {
+    "title": "Blogs",
+    "description": "Here you will find specialized articles that provide you with strategies, ideas, and modern tools to help you keep up with changes, and stand out from your competitors",
+    "more": "Browse Blogs",
+    "detailes":"Blog Details"
+  },
+    "newsletter": {
+    "validation": "email is not valid",
+    "placeholder": "email",
+    "already": "email already exists" ,
+    "success": "subscribed successfully",
+    "error": "an error occurred try again"
   }
 }

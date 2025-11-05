@@ -25,15 +25,32 @@
     "ctaSecondary": "İletişime Geçin"
   },
   "about": {
-    "title":"Hakkımızda",
-  "consultation": "Ücretsiz Danışma Talep Edin",
-  "knowMore": "Bizi Tanıyın"
+    "title": "Hakkımızda",
+    "consultation": "Ücretsiz Danışma Talep Edin",
+    "breadcrumbHome": "Ana Sayfa",
+    "breadcrumbAbout": "Hakkımızda",
+    "heroTitle": "Fikrinizi Dijital Gerçeğe Dönüştürün",
+    "heroSubtitle": "İşinizi büyütmenize ve geleceğe ayak uydurmanıza yardımcı olan yenilikçi yazılım çözümleri geliştiriyoruz",
+    "heroCta": "Hemen Projenizi Başlatın",
+    "knowMore": "Bizi Tanıyın",
+    "whyChooseUs": "Neden",
+    "companyName": "Subcode'u Tercih Etmelisiniz?",
+    "aboutDescription": "Başarımızın müşterilerimizin başarısına bağlı olduğuna inanıyoruz. Bu yüzden, hedef pazarınızda mükemmelliği sağlayan doğru analizlere ve profesyonel uygulamalara dayalı, özenle hazırlanmış hizmetler sunuyoruz.",
+    "benefits": [
+      "Uzmanlarımızla ücretsiz pazarlama danışmanlığı",
+      "Web sitesi oluşturma, kimlik tasarımı ve ücretli reklamlar dahil kapsamlı çözümler",
+      "Hedeflerinize kesin bir şekilde ulaşmanızı sağlayan 6 aylık entegre sosyal medya strateji planı"
+    ]
 },
   "services": {
     "title": "Hizmetlerimiz",
     "description": "İşinizi büyütmenize ve dijital varlığınızı geliştirmenize yardımcı olan yenilikçi çözümler sunuyoruz. Somut sonuçlar garanti eden uzmanlık sunuyoruz.",
     "more": "Hizmetlerimizi Keşfedin",
-    "detailes": "Hizmet Detayları"
+    "detailes": "Hizmet Detayları",
+    "servicesLabel": "Hizmetlerimiz",
+    "whyChooseUs": "Yazılım Geliştirme ve Entegre Dijital Çözümlerde Neden Bizi Tercih Etmelisiniz?",
+    "previousWorks": "{service} Alanındaki Önceki Çalışmalarımız",
+    "worksDescription": "Ekibimizin gerçekleştirdiği her yazılım projesinde, müşterilerimizin büyümesine katkıda bulunan ve onlar için güçlü bir dijital varlık oluşturan yenilikçi teknik çözümler sunmaya odaklanıyoruz"
   },
   "marquee": [
     "Kullanımı Kolay",
@@ -64,5 +81,18 @@
       { "number": 15, "label": "Yıllık Deneyim" },
       { "number": 50, "label": "Ödül" }
     ]
-  }
+  },
+    "blogs": {
+    "title": "Makaleler",
+    "description": "Burada, değişiklikleri takip etmenize ve rakiplerinizden ayırmak için size stratejiler, fikirler ve modern araçlar sunan uzman makaleler bulabilirsiniz",
+    "more": "Makaleleri Keşfedin",
+    "detailes":"Makale Detayları"
+  },
+      "newsletter": {
+  "validation": "E-posta geçerli değil",
+  "placeholder": "e-posta",
+  "already": "E-posta zaten mevcut",
+  "success": "Başarıyla abone olundu",
+  "error": "Bir hata oluştu, lütfen tekrar deneyin"
+}
 }

@@ -7,7 +7,7 @@ import { getMessages } from 'next-intl/server';
 import Navbar from '@/components/shared/navbar';
 import Footer from '@/components/shared/footer';
 import WhatsappContact from '@/components/shared/whatsapp-contact';
-
+import { Toaster } from "@/components/ui/sonner"
 const alexandria = Alexandria({
   subsets: ["latin"],
   variable: "--font-alexandria",
@@ -35,6 +35,7 @@ export default async function RootLayout({ children, params }) {
       >
         <NextIntlClientProvider messages={messages} locale={locale} >
           <Navbar />
+          <Toaster position="top-center" richColors />
           <WhatsappContact />
           {children}
           <Footer />

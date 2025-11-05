@@ -7,19 +7,34 @@ import React from 'react'
 import * as motion from "motion/react-client"
 import BlogSlider from '@/components/shared/blog-slider'
 import BlogGrid from '@/components/shared/blog-grid'
-const BlogsPage = () => {
-  const locale = useLocale()
+import { getLocale, getTranslations } from 'next-intl/server'
+import { getData } from '@/services/fetch-data'
+const BlogsPage =async () => {
+  const locale =await getLocale()
   const tabStyle = "py-3 px-4 data-[state=active]:bg-primary-800 data-[state=active]:text-white data-[state=active]:rounded-full max-md:data-[state=active]:rounded-2xl"
+  const b = await getTranslations();
+  const t = await getTranslations("blogs");
+  let blogs = []
+  const res = await getData({
+    url:"/category-with-blogs"
+  })
+  if (res?.code == 200) {
+    blogs = res?.data?.data
+  }
+  else{
+    blogs = []
+  }
+  
   return (
     <main >
       <div className="md:pt-40 pt-30 bg-[url('/images/hero-bg.svg')] bg-no-repeat space-y-16">
         {/* breadcrumbs */}
         <div className=' container'>
-          <CustomBreadcrumbs items={[{ label: 'الرئيسية', href: '/' }, { label: 'المقالات' }]} />
+          <CustomBreadcrumbs items={[{ label: b('navigation.home'), href: '/' }, { label: b('navigation.articles') }]} />
         </div>
         {/* section header  */}
         <div className='container'>
-          <SectionHeader title='المقالات' disc={"هنا ستجد مقالات متخصصة تقدم لك استراتيجيات، أفكار، وأدوات حديثة تساعدك على مواكبة التغيرات، التميز عن منافسيك"} />
+          <SectionHeader title={b('navigation.articles')} disc={t('description')} />
         </div>
         {/* tabs */}
         <motion.div
@@ -28,29 +43,18 @@ const BlogsPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           className='container'>
-          <Tabs dir={locale === "ar" ? "rtl" : "ltr"} defaultValue="all" className="w-full space-y-12">
+          <Tabs dir={locale === "ar" ? "rtl" : "ltr"} defaultValue={blogs?.[0]?.slug} className="w-full space-y-12">
             <TabsList className="bg-[#EBEBEB] mx-auto text-gray-100 h-fit  p-2 md:rounded-full rounded-3xl max-md:flex-wrap">
-              <TabsTrigger value="all" className={tabStyle}>الكل</TabsTrigger>
-              <TabsTrigger value="web" className={tabStyle}>مواقع إلكترونية</TabsTrigger>
-              <TabsTrigger value="store" className={tabStyle}>متاجر إلكترونية</TabsTrigger>
-              <TabsTrigger value="app" className={tabStyle}>تطبيقات</TabsTrigger>
-              <TabsTrigger value="markting" className={tabStyle}>تسويق إلكتروني</TabsTrigger>
+              {blogs?.map((item) => (
+                <TabsTrigger key={item?.id} value={item?.slug} className={tabStyle}>{item?.name}</TabsTrigger>
+              ))}
             </TabsList>
-            <TabsContent value="all">
-              <BlogsLayout />
-            </TabsContent>
-            <TabsContent value="web">
-              <BlogsLayout />
-            </TabsContent>
-            <TabsContent value="store">
-              <BlogsLayout />
-            </TabsContent>
-            <TabsContent value="app">
-              <BlogsLayout />
-            </TabsContent>
-            <TabsContent value="markting">
-              <BlogsLayout />
-            </TabsContent>
+            {blogs?.map((item) => (
+              <TabsContent key={item?.id} value={item?.slug}>
+                <BlogsLayout blogs={item?.blogs} />
+              </TabsContent>
+            ))}
+
           </Tabs>
         </motion.div>
       </div>
@@ -61,14 +65,14 @@ const BlogsPage = () => {
 export default BlogsPage
 
 
-const BlogsLayout = () => {
+const BlogsLayout = ({blogs}) => {
   return (
     <>
       <div className='md:hidden'>
-        <BlogSlider />
+        <BlogSlider blogs={blogs} />
       </div>
       <div className='max-md:hidden'>
-        <BlogGrid />
+        <BlogGrid blogs={blogs} />
       </div>
     </>
   )

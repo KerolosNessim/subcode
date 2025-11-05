@@ -34,7 +34,7 @@ const AboutSection = async () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className=' text-gray-100 lg:w-1/3 md:2/3 space-y-6'>
+          className=' text-gray-100 lg:w-1/2 md:2/3 space-y-6 '>
             <h3 className='lg:text-2xl text-xl font-medium '>{data?.title}</h3>
             <p className='lg:text-xl md:text-lg text-sm text-gray-300' >{data?.description}</p>
           <div className='flex items-center  gap-4 '>
@@ -49,13 +49,13 @@ const AboutSection = async () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className='lg:w-2/3 md:1/3 min-h-[70vh] relative overflow-hidden max-lg:hidden  '>
+          className='lg:w-1/2 md:1/3 min-h-[70vh] relative overflow-hidden max-lg:hidden  '>
           <Image 
             src={'/images/circles.svg'} 
             width={1000} 
             height={1000} 
             alt='about' 
-            className='animate-pulse object-cover absolute top-0 -end-[10%]' 
+            className='animate-pulse object-cover absolute top-0 -end-0' 
           />
           {data?.[`image_${locale}`] && (
             <Image 

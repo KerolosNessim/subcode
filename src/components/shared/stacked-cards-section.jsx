@@ -72,6 +72,7 @@ export default function StackSection({ withLink = true }) {
               return (
                 <Card
                   key={`p_${i}`}
+                  id={project?.id}
                   i={i}
                   className={i % 2 === 0 ? 'odd:bg-[#104c66] even:bg-[#2c4443]' : 'odd:bg-[#2c4443] even:bg-[#104c66]'}
                   img={project?.image}
@@ -97,6 +98,7 @@ export default function StackSection({ withLink = true }) {
 }
 
 export const Card = ({
+  id,
   i,
   title,
   description,
@@ -142,8 +144,8 @@ export const Card = ({
             ))}
           </ul>
 
-          <DynamicLink href={"/services/slug"}>
-              {t('detailes')}
+          <DynamicLink href={`/services/${id}`}>
+            {t('detailes')}
           </DynamicLink>
 
         </div>

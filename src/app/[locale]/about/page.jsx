@@ -1,21 +1,27 @@
 import AboutSection from '@/components/home/about-section'
+import Counters from '@/components/shared/counters'
 import CustomBreadcrumbs from '@/components/shared/custom-breadcrumbs'
-import CustomMarquee from '@/components/shared/custom-marquee'
 import DynamicLink from '@/components/shared/dynamic-link'
 import PartnerMarquee from '@/components/shared/partner-marquee'
-import Image from 'next/image'
-import React from 'react'
 import * as motion from "motion/react-client"
-import { FaRegSquareCheck } from "react-icons/fa6";
-import Counters from '@/components/shared/counters'
+import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
+import { FaRegSquareCheck } from "react-icons/fa6"
 
-const AboutPage = () => {
+const AboutPage =async () => {
+  const t = await getTranslations('about');
+  
   return (
     <main className='overflow-hidden'>
       <div className="md:pt-40 pt-30 bg-[url('/images/hero-bg.svg')] bg-no-repeat">
         {/* breadcrumbs */}
         <div className=' container'>
-          <CustomBreadcrumbs items={[{ label: 'الرئيسية', href: '/' }, { label: 'من نحن' }]} />
+          <CustomBreadcrumbs 
+            items={[
+              { label: t('breadcrumbHome'), href: '/' }, 
+              { label: t('breadcrumbAbout') }
+            ]} 
+          />
         </div>
         <AboutSection />
         <div className='py-10 container'>
@@ -31,9 +37,9 @@ const AboutPage = () => {
         <div className='bg-center h-80 w-1/3 max-md:hidden bg-[url("/images/about.svg")]'>
         </div>
         <div className='py-16 px-6 text-white lg:w-1/2 md:w-2/3 space-y-3' >
-          <p>حول فكرتك إلي واقع رقمي</p>
-          <h3 className='md:text-3xl text-xl font-Semibold leading-12'>نطوّر لك حلول برمجية مبتكرة تساعدك تنمّي عملك وتواكب المستقبل</h3>
-          <DynamicLink href="/contact">ابدأ مشروعك الآن</DynamicLink>
+          <p>{t('heroTitle')}</p>
+          <h3 className='md:text-3xl text-xl font-Semibold leading-12'>{t('heroSubtitle')}</h3>
+          <DynamicLink href="/contact">{t('heroCta')}</DynamicLink>
         </div>
       </motion.div>
       <div className=" bg-[url('/images/hero-bg.svg')] bg-no-repeat py-16 overflow-hidden space-y-20">
@@ -60,21 +66,15 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
             className='lg:w-1/2 md:w-2/3 space-y-4'>
-            <h3 className='lg:text-4xl md:text-3xl text-2xl'>لماذا تختار <span className='text-primary-800'>صب كود</span></h3>
-            <p className='text-gray-200 leading-8 '>نحن نؤمن أن نجاحنا مرتبط بنجاح عملائنا، لذا نحرص على تقديم خدمات مدروسة، مبنية على تحليل دقيق، وتنفيذ احترافي يضمن لك التفوّق في سوقك المستهدف.</p>
+            <h3 className='lg:text-4xl md:text-3xl text-2xl'>{t('whyChooseUs')} <span className='text-primary-800'>{t('companyName')}</span></h3>
+            <p className='text-gray-200 leading-8'>{t('aboutDescription')}</p>
             <ul className='text-gray-100 lg:text-lg space-y-4 leading-8'>
-              <li className='flex items-center gap-3'>
-                <FaRegSquareCheck className='text-primary-800 shrink-0' />
-                <p>استشارة تسويقية مجانية مع خبرائنا.</p>
-              </li>
-              <li className='flex items-center gap-3'>
-                <FaRegSquareCheck className='text-primary-800 shrink-0' />
-                <p>تغطية متكاملة تشمل إنشاء موقعك الإلكتروني وتصميم الهوية والإعلانات المدفوعة.</p>
-              </li>
-              <li className='flex items-center gap-3'>
-                <FaRegSquareCheck className='text-primary-800 shrink-0' />
-                <p>خطة استراتيجية متكاملة لمنصات التواصل الاجتماعي تمتد لـ ٦ أشهر تضمن لك تحقيق أهدافك بكل دقة.</p>
-              </li>
+              {t.raw('benefits').map((benefit, index) => (
+                <li key={index} className='flex items-center gap-3'>
+                  <FaRegSquareCheck className='text-primary-800 shrink-0' />
+                  <p>{benefit}</p>
+                </li>
+              ))}
             </ul>
           </motion.div>
         </div>

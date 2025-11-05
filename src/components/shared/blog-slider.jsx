@@ -8,7 +8,7 @@ import Autoplay from "embla-carousel-autoplay"
 import { useLocale } from 'next-intl'
 import BlogCrd from '../shared/blog-card'
 
-const BlogSlider = () => {
+const BlogSlider = ({blogs}) => {
   const locale = useLocale()
   return (
     <Carousel
@@ -19,9 +19,9 @@ const BlogSlider = () => {
       ]}
       opts={{ loop: true, direction: locale === "ar" ? "rtl" : "ltr" }}>
       <CarouselContent className={""}>
-        {Array.from({ length: 3 }).map((_, i) => (
+        {blogs?.map((blog, i) => (
           <CarouselItem key={i} className={"basis-[80%] md:basis-1/2 lg:basis-1/3 py-4 pl-6"}>
-            <BlogCrd />
+            <BlogCrd blog={blog} />
           </CarouselItem>
         ))}
       </CarouselContent>

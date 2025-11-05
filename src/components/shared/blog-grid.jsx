@@ -1,11 +1,11 @@
 import React from 'react'
 import BlogCrd from './blog-card'
 
-const BlogGrid = () => {
+const BlogGrid = ({blogs}) => {
   return (
     <div className='grid md:grid-cols-2  lg:grid-cols-3 gap-6'>
-      {Array.from({ length: 6 }).map((_, i) => (
-        <BlogCrd key={i} />
+      {blogs?.map((item) => (
+        <BlogCrd key={item?.id} blog={item} />
       ))}
     </div>
   )

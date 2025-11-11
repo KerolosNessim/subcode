@@ -92,14 +92,14 @@ const Footer = ({settings}) => {
         {/* numbers */}
         <div className=' space-y-2'>
           <h3 className='text-primary-800 font-semibold'>{t('ourNumbers')}</h3>
-          <ul className='space-y-2' >
+          <ul className='space-y-2'  >
             <li>
               <a href="#" className='flex items-center gap-2'>
                 <ReactCountryFlag countryCode="EG" svg className="rounded-md" style={{
                   width: "25px",
                   height: "25px",
                 }} />
-                <p className='text-gray-200 '>
+                <p dir="ltr" className='text-gray-200 '>
                   {settings?.site_phone_ar}
                 </p>
               </a>
@@ -110,7 +110,7 @@ const Footer = ({settings}) => {
                   width: "25px",
                   height: "25px",
                 }} />
-                <p className='text-gray-200 '>
+                <p dir="ltr" className='text-gray-200 '>
                   {settings?.site_phone_sar}
                 </p>
               </a>
@@ -121,7 +121,7 @@ const Footer = ({settings}) => {
                   width: "25px",
                   height: "25px",
                 }} />
-                <p className='text-gray-200 '>
+                <p dir="ltr" className='text-gray-200 '>
                   {settings?.site_phone_tr}
                 </p>
               </a>
@@ -138,7 +138,7 @@ const Footer = ({settings}) => {
         className='pt-10 lg:w-3/4 mx-auto flex items-center justify-between max-md:flex-col max-md:gap-6 '>
         {/* socials */}
         <div className='space-y-4'>
-          <p className='text-primary-800 font-semibold max-md:text-center'>{t('followUs')}</p>
+          <p className='text-primary-800 font-semibold max-md:text-center'>{t('contactUs')}</p>
 
           <div className='flex items-center justify-center gap-4 flex-wrap'>
             {settings?.social_media?.facebook && (

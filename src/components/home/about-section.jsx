@@ -6,9 +6,11 @@ import Image from 'next/image'
 import * as motion from "motion/react-client"
 import { getData } from '@/services/fetch-data'
 import { getLocale, getTranslations } from 'next-intl/server'
-const AboutSection = async () => {
+import { getSettings } from '@/services/fetch-settings'
+const AboutSection = async ({knowMoreLink=true}) => {
   const locale = await getLocale()
   const t = await getTranslations('about')
+  const settings = await getSettings();
   let data
   const res = await getData({
     url: "/about-us"
@@ -38,10 +40,12 @@ const AboutSection = async () => {
             <h3 className='lg:text-2xl text-xl font-medium '>{data?.title}</h3>
             <p className='lg:text-xl md:text-lg text-sm text-gray-300' >{data?.description}</p>
           <div className='flex items-center  gap-4 '>
-            <DynamicLinkDark href='#' external>{t('consultation')}</DynamicLinkDark>
-            <DynamicLink href={"#"} external>
+              <DynamicLinkDark href={`https://wa.me/${settings?.social_media?.whatsapp}`} external>{t('consultation')}</DynamicLinkDark>
+            {knowMoreLink && (
+              <DynamicLink href={"/about"}>
               {t('knowMore')}
             </DynamicLink>
+            )}
           </div>
         </motion.div>
         <motion.div

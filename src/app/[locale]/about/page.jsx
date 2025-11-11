@@ -4,6 +4,7 @@ import Counters from '@/components/shared/counters'
 import CustomBreadcrumbs from '@/components/shared/custom-breadcrumbs'
 import DynamicLink from '@/components/shared/dynamic-link'
 import PartnerMarquee from '@/components/shared/partner-marquee'
+import { getSettings } from '@/services/fetch-settings'
 import * as motion from "motion/react-client"
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
@@ -11,6 +12,7 @@ import { FaRegSquareCheck } from "react-icons/fa6"
 
 const AboutPage =async () => {
   const t = await getTranslations('about');
+  const settings = await getSettings();
   
   return (
     <main className='overflow-hidden'>
@@ -24,7 +26,7 @@ const AboutPage =async () => {
             ]} 
           />
         </div>
-        <AboutSection />
+        <AboutSection knowMoreLink={false} />
         <div className='py-10 container'>
           <PartnerMarquee />
         </div>
@@ -40,7 +42,7 @@ const AboutPage =async () => {
         <div className='py-16 px-6 text-white lg:w-1/2 md:w-2/3 space-y-3' >
           <p>{t('heroTitle')}</p>
           <h3 className='md:text-3xl text-xl font-Semibold leading-12'>{t('heroSubtitle')}</h3>
-          <DynamicLink href="/contact">{t('heroCta')}</DynamicLink>
+          <DynamicLink href={`https://wa.me/${settings?.social_media?.whatsapp}`} external>{t('heroCta')}</DynamicLink>
         </div>
       </motion.div>
       <div className=" bg-[url('/images/hero-bg.svg')] bg-no-repeat py-16 overflow-hidden space-y-20">

@@ -107,7 +107,7 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar logo={settings?.site_logo} />
           <Toaster position="top-center" richColors />
-          <WhatsappContact />
+          <WhatsappContact number={settings?.social_media?.whatsapp} />
           {children}
           <Footer settings={settings} />
         </NextIntlClientProvider>

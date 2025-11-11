@@ -155,13 +155,13 @@ const Navbar = ({ logo }) => {
       initial={{ y: -200 }}
       animate={{ y: 0 }}
       transition={{ duration: 1 }}
-      className="fixed inset-x-0 top-2  z-50 flex items-center justify-center md:top-12 md:gap-4 gap-2 max-md:container max-md:bg-white max-md:rounded-full max-md:shadow-xl max-md:p-2"
+      className="fixed inset-x-0 top-2  z-50 flex items-center justify-center md:top-12 md:gap-4 gap-2 max-md:container max-md:bg-white max-md:rounded-full max-md:shadow-xl "
       aria-label="Main navigation"
     >
       {/* Logo */}
       <Link
         href="/"
-        className="flex items-center justify-center size-16 bg-black rounded-full shrink-0"
+        className="flex items-center justify-center md:size-16 size-12 bg-black rounded-full shrink-0 ms-2 md:ms-0"
         aria-label="Home"
       >
         <Image

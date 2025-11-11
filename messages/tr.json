@@ -85,7 +85,7 @@
     "unleashPotential": "Potansiyelinizi ortaya çıkarın ve projenize başlamak için bizimle iletişime geçin",
     "discoverMore": "Daha Fazla Keşfedin",
     "blog": "Blog",
-    "pricing": "Fiyatlandırma",
+    "pricing": "Paketler",
     "services": "Önemli Bağlantılar",
     "faq": "SSS",
     "ourNumbers": "Rakamlarımız",
@@ -105,7 +105,8 @@
     "features_title": "İhtiyaçlarınıza Özel Olarak Tasarlandı",
     "details": "Detaylar",
     "per_month": "TL/aylık",
-    "per_year": "TL/yıllık"
+    "per_year": "TL/yıllık",
+    "ask":"Fiyatı sor"
   },
   "team": {
     "title": "Ekibimiz",

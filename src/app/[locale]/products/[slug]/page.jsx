@@ -6,6 +6,7 @@ import DynamicLink from '@/components/shared/dynamic-link'
 import TechMarquee from '@/components/shared/tech-marquee'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getData } from '@/services/fetch-data'
+import { getSettings } from '@/services/fetch-settings'
 import * as motion from "motion/react-client"
 import { useLocale, useTranslations } from 'next-intl'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -27,6 +28,7 @@ const SingleProductPage = () => {
   const tabstyle = "data-[state=active]: shadow-none lg:px-6 px-4 text-lg text-gray-300  data-[state=active]:text-gray-100 "
   const [singleWork, setSingleWork] = useState(null)
   const [images, setImages] = useState([])
+  const [settings, setSettings] = useState({})
   async function getSingleWork() {
     const res = await getData({
       url: `/websites/${slug}`,
@@ -59,6 +61,11 @@ const SingleProductPage = () => {
     }
   }
   useEffect(() => {
+    async function fetchSettings() {
+      const settings = await getSettings()
+      setSettings(settings)
+    }
+    fetchSettings()
     getSingleWork()
   }, [slug])
   return (
@@ -202,9 +209,9 @@ const SingleProductPage = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   key={index}
-                  className='odd:bg-white-50 even:bg-primary-800 shadow-lg rounded-3xl p-8 odd:text-primary-800 even:text-white even:scale-110 even:shadow-xl even:bg-[url("/images/card-pattern.svg")] space-y-10 group'>
+                  className='odd:bg-white-50 even:bg-primary-800 shadow-lg rounded-3xl p-8 odd:text-primary-800 even:text-white  even:shadow-xl even:bg-[url("/images/card-pattern.svg")] space-y-10 group'>
                   <h3 className=''>{item?.name}</h3>
-                  <h4 className='text-4xl font-bold '>{Number(item?.price).toFixed(2)} $ <span className="text-gray-400 group-even:text-white text-xl">/ {item?.type_name}</span></h4>
+                  <h4 className='text-4xl font-bold '>{b('pricing.ask')} </h4>
                   <p className=' '>{item?.description}</p>
                   <div className='h-[2px] w-full bg-primary-800 group-even:bg-white-50'></div>
                   <ul className='space-y-6'>
@@ -218,7 +225,18 @@ const SingleProductPage = () => {
                       ))
                     }
                   </ul>
-                  <DynamicLink href={'#'} external className={"w-full border-none rounded-full shadow-xl hover:shadow hover:shadow-white"}>إشترك في الباقة</DynamicLink>
+                  <a
+                    href={`https://wa.me/${settings?.social_media?.whatsapp}?text=${encodeURIComponent(`Hello, I would like to subscribe to the ${item?.name} package for the project ${singleWork?.name}
+
+Duration: ${item?.type_name}
+
+Description: ${item?.description}`)}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className="w-full border-none rounded-full shadow-xl hover:shadow hover:shadow-white bg-primary-800 text-white text-center py-3 px-6 inline-block hover:bg-primary-700 transition-colors"
+                  >
+                    {b('pricing.subscribe')}
+                  </a>
                 </motion.div>
               ))
             }

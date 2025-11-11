@@ -1,14 +1,23 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import PartnerMarquee from '../shared/partner-marquee';
 import * as motion from 'motion/react-client';
 import DynamicLink from '../shared/dynamic-link';
 import DynamicLinkDark from '../shared/dynamic-link-dark';
 import Typewriter from 'typewriter-effect';
+import { getSettings } from '@/services/fetch-settings';
 function HeroSection() {
   const t = useTranslations('hero');
   const locale = useLocale();
+  const [settings, setSettings] = useState({});
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const settings = await getSettings();
+      setSettings(settings);
+    };
+    fetchSettings();
+  }, []);
   return (
     <section
       className="text-center flex items-center justify-center " >
@@ -66,8 +75,8 @@ function HeroSection() {
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4 }}
           className='flex items-center justify-center gap-4 '>
-          <DynamicLinkDark href='#' external>{t('ctaPrimary')}</DynamicLinkDark>
-          <DynamicLink href={"#"} external>
+          <DynamicLinkDark href={`https://wa.me/${settings?.social_media?.whatsapp}`} external>{t('ctaPrimary')}</DynamicLinkDark>
+          <DynamicLink href={`https://wa.me/${settings?.social_media?.whatsapp}`} external>
             {t('ctaSecondary')}
           </DynamicLink>
         </motion.div>

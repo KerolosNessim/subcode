@@ -57,7 +57,9 @@ const BlogsPage =async () => {
             <TabsList className="bg-[#EBEBEB] mx-auto text-gray-100 h-fit  p-2 md:rounded-full rounded-3xl max-md:flex-wrap">
               <TabsTrigger value="all" className={tabStyle}>{t('all')}</TabsTrigger>
               {blogs?.map((item) => (
-                <TabsTrigger key={item?.id} value={item?.slug} className={tabStyle}>{item?.name}</TabsTrigger>
+                item?.blogs?.length > 0 && (
+                  <TabsTrigger key={item?.id} value={item?.slug} className={tabStyle}>{item?.name}</TabsTrigger>
+                )
               ))}
             </TabsList>
             <TabsContent value="all">

@@ -29,7 +29,9 @@ const SingleProductPage = () => {
   const [singleWork, setSingleWork] = useState(null)
   const [images, setImages] = useState([])
   const [settings, setSettings] = useState({})
+  const [loading, setLoading] = useState(false)
   async function getSingleWork() {
+    setLoading(true)
     const res = await getData({
       url: `/websites/${slug}`,
     })
@@ -59,6 +61,7 @@ const SingleProductPage = () => {
     else {
       setSingleWork(null)
     }
+    setLoading(false)
   }
   useEffect(() => {
     async function fetchSettings() {
@@ -68,6 +71,14 @@ const SingleProductPage = () => {
     fetchSettings()
     getSingleWork()
   }, [slug])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return (
     <main >
       <div className="md:pt-40 pt-30 pb-20 bg-[url('/images/hero-bg.svg')]  space-y-20">

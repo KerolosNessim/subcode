@@ -12,13 +12,18 @@ import { FaCheckCircle } from "react-icons/fa";
 import { Switch } from '@/components/ui/switch'
 import { getData } from '@/services/fetch-data'
 import { IoIosCheckmarkCircle, IoMdCloseCircle } from 'react-icons/io'
+import { getSettings } from '@/services/fetch-settings'
+import { set } from 'zod'
 const PricesPage = () => {
   const locale = useLocale();
   const t = useTranslations();
   const [isMonthly, setIsMonthly] = useState(true);
   const [prices, setPrices] = useState([]);
   const [packagesFeatures, setPackagesFeatures] = useState([]);
+  const [settings, setSettings] = useState({});
+  const [loading, setLoading] = useState(false)
   async function getPrices() {
+    setLoading(true)
     const res = await getData({ url: '/packages?type=' + (isMonthly ? 'monthly' : 'yearly') });
     if (res?.code == 200) {
       setPrices(res?.data?.data);
@@ -26,8 +31,10 @@ const PricesPage = () => {
     else {
       setPrices([]);
     }
+    setLoading(false)
   }
   async function getPackagesFeatures() {
+    setLoading(true)
     const res = await getData({ url: '/feature-packages' });
     if (res?.code == 200) {
       setPackagesFeatures(res?.data?.data);
@@ -35,17 +42,32 @@ const PricesPage = () => {
     else {
       setPackagesFeatures([]);
     }
+    setLoading(false)
+  }
+  async function fetchSettings() {
+    setLoading(true)
+    const settings = await getSettings()
+    setSettings(settings)
+    setLoading(false)
   }
   useEffect(() => {
     getPrices();
     getPackagesFeatures();
+    fetchSettings();
   }, [isMonthly]);
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return (
     <main >
       <div className="md:pt-40 pt-30  bg-[url('/images/hero-bg.svg')] space-y-20 ">
         {/* breadcrumbs */}
         <div className=' container'>
-          <CustomBreadcrumbs items={[{ label:t('navigation.home'), href: '/' }, { label:t('navigation.pricing') }]} />
+          <CustomBreadcrumbs items={[{ label: t('navigation.home'), href: '/' }, { label: t('navigation.pricing') }]} />
         </div>
         {/* prices section */}
         <section className='container'>
@@ -87,9 +109,9 @@ const PricesPage = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 1, delay: index * 0.2 }}
                   key={index}
-                  className='odd:bg-white-50 even:bg-primary-800 shadow-lg rounded-3xl p-8 odd:text-primary-800 even:text-white even:scale-110 even:shadow-xl even:bg-[url("/images/card-pattern.svg")] space-y-10 group'>
+                  className='odd:bg-white-50 even:bg-primary-800 shadow-lg rounded-3xl p-8 odd:text-primary-800 even:text-white even:lg:scale-110 even:shadow-xl even:bg-[url("/images/card-pattern.svg")] space-y-10 group'>
                   <h3 className=''>{item?.name}</h3>
-                  <h4 className='text-4xl font-bold '>{Number(item?.price).toFixed(2)} {isMonthly ? t('pricing.per_month') : t('pricing.per_year')}</h4>
+                  <h4 className='text-4xl font-bold '>{t('pricing.ask')}</h4>
                   <p className=' '>{item?.description}</p>
                   <div className='h-[2px] w-full bg-primary-800 group-even:bg-white-50'></div>
                   <ul className='space-y-6'>
@@ -103,7 +125,11 @@ const PricesPage = () => {
                       ))
                     }
                   </ul>
-                  <DynamicLink href={'#'} external className={"w-full border-none rounded-full shadow-xl hover:shadow hover:shadow-white"}>{t('pricing.subscribe')}</DynamicLink>
+                  <DynamicLink href={`https://wa.me/${settings?.social_media?.whatsapp}?text=${encodeURIComponent(`Hello, I would like to subscribe to the ${item?.name} 
+
+Duration: ${item?.type_name}
+
+Description: ${item?.description}`)}`} external className={"w-full border-none rounded-full shadow-xl hover:shadow hover:shadow-white"}>{t('pricing.subscribe')}</DynamicLink>
                 </motion.div>
               ))
             }
@@ -122,7 +148,7 @@ const PricesPage = () => {
           <div className='py-16 px-6 text-white lg:w-1/2 md:w-2/3 space-y-5' >
             <p>{t('pricing.custom_plan_title')}</p>
             <h3 className='md:text-3xl text-xl font-Semibold leading-12'>{t('pricing.custom_plan_description')}</h3>
-            <DynamicLink href="/contact">{t('pricing.custom_plan_cta')}</DynamicLink>
+            <DynamicLink href={`https://wa.me/${settings?.social_media?.whatsapp}`} external>{t('pricing.custom_plan_cta')}</DynamicLink>
           </div>
         </motion.div>
         {/* Features Comparison Table */}
@@ -143,17 +169,17 @@ const PricesPage = () => {
             transition={{ duration: 1 }}
             className='bg-[#051a22] max-md:py-12'>
             <div className='max-lg:container lg:w-[95%] flex items-center justify-between'>
-              <Image 
-                src="/images/table.svg" 
-                width={100} 
-                height={100} 
-                alt="prices" 
-                className='h-40 basis-1/4 shrink-0 object-cover max-md:hidden' 
+              <Image
+                src="/images/table.svg"
+                width={100}
+                height={100}
+                alt="prices"
+                className='h-40 basis-1/4 shrink-0 object-cover max-md:hidden'
               />
               {prices?.map((pkg, index) => (
                 <div key={pkg.id} className='basis-1/4 max-md:basis-1/3 shrink-0 text-center'>
                   <p className='text-white'>{pkg.name}</p>
-                  <p className='text-gray-400 text-xs'>{Number(pkg.price).toFixed(2)} / {pkg.type_name}</p>
+                  {/* <p className='text-gray-400 text-xs'>{Number(pkg.price).toFixed(2)} / {pkg.type_name}</p> */}
                 </div>
               ))}
             </div>
@@ -189,7 +215,7 @@ const PricesPage = () => {
                       {isAvailable ? (
                         <IoIosCheckmarkCircle className='text-primary-800 size-6' />
                       ) : (
-                          <IoMdCloseCircle className='text-red-500 size-6' />
+                        <IoMdCloseCircle className='text-red-500 size-6' />
                       )}
                     </div>
                   );

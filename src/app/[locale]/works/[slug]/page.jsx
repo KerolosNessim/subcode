@@ -26,7 +26,9 @@ const SingleWorkPage = () => {
   const tabstyle = "data-[state=active]: shadow-none lg:px-6 px-4 text-lg text-gray-300  data-[state=active]:text-gray-100 "
   const [singleWork, setSingleWork] = useState(null)
   const [images, setImages] = useState([])
+  const [loading, setLoading] = useState(false)
   async function getSingleWork() {
+    setLoading(true)
     const res = await getData({
       url: `/projects/${slug}`,
     })
@@ -56,10 +58,18 @@ const SingleWorkPage = () => {
     else {
       setSingleWork(null)
     }
+    setLoading(false)
   }
   useEffect(() => {
     getSingleWork()
   }, [slug])
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="loader"></div>
+      </div>
+    )
+  }
   return (
     <main >
       <div className="md:pt-40 pt-30 pb-20 bg-[url('/images/hero-bg.svg')]  space-y-20">

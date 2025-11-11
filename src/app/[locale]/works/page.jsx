@@ -14,7 +14,7 @@ const WorksPage = async () => {
           { label: b('navigation.works') },]} />
         </div>
         {/* works section  */}
-        <WorksSection page />
+        <WorksSection page disc={false} />
       </div>
 
     </main>

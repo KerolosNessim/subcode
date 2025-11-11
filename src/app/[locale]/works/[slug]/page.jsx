@@ -164,7 +164,7 @@ const SingleWorkPage = () => {
               >
                 {
                   singleWork?.review_projects?.length>0 &&
-                  <ClientClientSlider reviews={singleWork?.review_projects} />
+                  <ClientClientSlider withArrow={false} reviews={singleWork?.review_projects} />
                 }
               </motion.div>
             </TabsContent>

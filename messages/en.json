@@ -4,7 +4,7 @@
     "about": "About Us",
     "services": "Our Services",
     "works": "Our Works",
-    "pricing": "Pricing",
+    "pricing": "Packages",
     "products": "Our Products",
     "articles": "Blogs"
   },
@@ -71,7 +71,8 @@
     "tabs": {
       "description": "Description",
       "features": "Features",
-      "reviews": "Customer Reviews"
+      "reviews": "Customer's Review",
+      "allreviews":"Customers' Reviews"
     },
     "tech":"Technologies Used",
     "packages":"Choose the best plan for your business",

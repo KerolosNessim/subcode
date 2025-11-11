@@ -150,13 +150,13 @@ export const Card = ({
 
         </div>
         {/* image */}
-        <div className='md:w-1/2 w-full md:h-[400px] h-[250px] self-end'>
+        <div className='md:w-1/2 max-md:hidden md:h-[400px] h-[250px]  rounded pe-10'>
           <Image
             src={img}
             width={300}
             height={300}
             alt="victor"
-            className=" w-full h-full drop-shadow-2xl drop-shadow-white-50/50 "
+            className=" w-full h-full object-contain drop-shadow-xl  drop-shadow-white-50/10 "
           />
         </div>
 

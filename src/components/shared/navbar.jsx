@@ -68,7 +68,7 @@ const MobileNavItem = ({ href, label, hasDropdown, children, products }) => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ logo }) => {
   const locale = useLocale();
   const t = useTranslations("navigation");
   const [isOpen, setIsOpen] = useState(false);
@@ -155,17 +155,17 @@ const Navbar = () => {
       initial={{ y: -200 }}
       animate={{ y: 0 }}
       transition={{ duration: 1 }}
-      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center md:top-12 md:gap-4"
+      className="fixed inset-x-0 top-2  z-50 flex items-center justify-center md:top-12 md:gap-4 gap-2 max-md:container max-md:bg-white max-md:rounded-full max-md:shadow-xl max-md:p-2"
       aria-label="Main navigation"
     >
       {/* Logo */}
       <Link
         href="/"
-        className="flex items-center justify-center size-16 bg-black md:rounded-full"
+        className="flex items-center justify-center size-16 bg-black rounded-full shrink-0"
         aria-label="Home"
       >
         <Image
-          src="/images/logo.png"
+          src={logo || "/images/logo.png"}
           alt="Logo"
           width={100}
           height={100}
@@ -175,7 +175,7 @@ const Navbar = () => {
       </Link>
 
       {/* Main Navigation */}
-      <div className="flex items-center justify-end w-full h-16 px-6 bg-white md:justify-center md:w-fit md:rounded-full shadow-xl gap-4">
+      <div className="flex items-center justify-end w-full h-16 px-6 md:bg-white md:justify-center md:w-fit rounded-full md:shadow-xl gap-4">
         {/* Desktop Navigation Links */}
         <ul className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map(({ href, label, hasDropdown }) => (

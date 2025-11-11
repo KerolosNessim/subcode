@@ -134,7 +134,7 @@ const SingleProductPage = () => {
             <TabsList className={"w-full rounded-none bg-transparent py-6 border-b-2 border-gray-400/30 justify-start"}>
               <TabsTrigger value="desc" className={tabstyle}>{b('singleWork.tabs.description')}</TabsTrigger>
               <TabsTrigger value="adv" className={tabstyle}>{b('singleWork.tabs.features')}</TabsTrigger>
-              <TabsTrigger value="rev" className={tabstyle}>{b('singleWork.tabs.reviews')}</TabsTrigger>
+              <TabsTrigger value="rev" className={tabstyle}>{b('singleWork.tabs.allreviews')}</TabsTrigger>
             </TabsList>
             <TabsContent value="desc" className='space-y-8'>
               <div className="text-gray-200 leading-8 max-md:text-sm">

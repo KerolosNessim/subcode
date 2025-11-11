@@ -30,13 +30,13 @@ const TechMarquee = ({data,title}) => {
             </div>
           ))}
         </Marquee>
-        <Marquee repeat={100} reverse pauseOnHover className="[--duration:40s] [--gap:20px]">
+        {/* <Marquee repeat={100} reverse pauseOnHover className="[--duration:40s] [--gap:20px]">
           {data?.map((img, idx) => (
             <div key={idx} className='bg-white rounded-full p-4 shadow-md'>
               <Image src={img} alt="tech" width={100} height={100} className="object-contain size-12 mx-auto" />
             </div>
           ))}
-        </Marquee>
+        </Marquee> */}
       </motion.div>
     </section>
   )

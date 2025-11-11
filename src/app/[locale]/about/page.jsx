@@ -1,4 +1,5 @@
 import AboutSection from '@/components/home/about-section'
+import TeamSection from '@/components/home/team-section'
 import Counters from '@/components/shared/counters'
 import CustomBreadcrumbs from '@/components/shared/custom-breadcrumbs'
 import DynamicLink from '@/components/shared/dynamic-link'
@@ -80,6 +81,8 @@ const AboutPage =async () => {
         </div>
         {/* counters */}
         <Counters />
+        {/* team  */}
+        <TeamSection/>
       </div>
     </main>
   )

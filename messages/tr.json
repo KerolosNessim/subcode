@@ -4,7 +4,7 @@
     "about": "Hakkımızda",
     "services": "Hizmetlerimiz",
     "works": "Çalışmalarımız",
-    "pricing": "Fiyatlandırma",
+    "pricing": "Paketler",
     "products": "Ürünlerimiz",
     "articles": "Makaleler"
   },
@@ -70,7 +70,8 @@
     "tabs": {
       "description": "Açıklama",
       "features": "Özellikler",
-      "reviews": "Müşteri Yorumları"
+      "reviews": "Müşteri Yorumları",
+      "allreviews": "Müşteri Yorumları"
     },
     "tech":"Tecnolojiler Kullanıldı",
     "packages": "İşiniz için en uygun planı seçin",

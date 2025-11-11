@@ -5,14 +5,15 @@ import * as motion from "motion/react-client"
 import Image from 'next/image'
 import Newsletter from './newsletter'
 import ReactCountryFlag from 'react-country-flag'
-import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaYoutube } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaTwitter, FaWhatsapp, FaYoutube, FaTelegram } from "react-icons/fa6";
 import LocaleSwitcher from './locale-switcher'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
-const Footer = () => {
+const Footer = ({settings}) => {
   const t = useTranslations('footer')
   const b = useTranslations()
+
   return (
     <footer className=' container  py-10 relative overflow-hidden z-[2]'>
       <Image src="/images/waves-circle.svg" alt="footer" width={1000} height={1000} className='opacity-50 size-60 object-cover absolute top-0 end-0 z-[-1]' />
@@ -27,7 +28,7 @@ const Footer = () => {
         <p className='text-gray-100 text-2xl font-semibold'>{t('boostProfits')}</p>
         {/* links */}
         <div className='flex items-center gap-4'>
-          <DynamicLinkDark href='#' external>{t('contactUs')}</DynamicLinkDark>
+          <DynamicLinkDark href={`https://wa.me/${settings.social_media.whatsapp.replace(/[^0-9]/g, '')}`} external>{t('contactUs')}</DynamicLinkDark>
           <DynamicLink href={"/prices"}>
             {t('discoverPricing')}
           </DynamicLink>
@@ -44,10 +45,10 @@ const Footer = () => {
         <div className='text-center space-y-4 max-lg:w-full lg:max-w-1/3'>
           {/* image */}
           <div className='size-20 bg-black rounded-full flex items-center justify-center mx-auto'>
-            <Image src="/images/logo.png" alt="logo" width={100} height={100} className='w-1/2 object-cover' />
+            <Image src={settings?.site_logo||"/images/logo.png"} alt="logo" width={100} height={100} className='w-1/2 object-cover' />
           </div>
           {/* title */}
-          <h3 className=' text-gray-400 font-bold'>{t('title')}</h3>
+          <h3 className=' text-gray-400 font-bold'>{settings?.site_description}</h3>
           {/* input */}
           <Newsletter />
         </div>
@@ -99,7 +100,7 @@ const Footer = () => {
                   height: "25px",
                 }} />
                 <p className='text-gray-200 '>
-                  01025187506
+                  {settings?.site_phone_ar}
                 </p>
               </a>
             </li>
@@ -110,7 +111,7 @@ const Footer = () => {
                   height: "25px",
                 }} />
                 <p className='text-gray-200 '>
-                  01025187506
+                  {settings?.site_phone_sar}
                 </p>
               </a>
             </li>
@@ -121,7 +122,7 @@ const Footer = () => {
                   height: "25px",
                 }} />
                 <p className='text-gray-200 '>
-                  01025187506
+                  {settings?.site_phone_tr}
                 </p>
               </a>
             </li>
@@ -136,29 +137,68 @@ const Footer = () => {
         transition={{ duration: 1 }}
         className='pt-10 lg:w-3/4 mx-auto flex items-center justify-between max-md:flex-col max-md:gap-6 '>
         {/* socials */}
-        <div className='space-y-2'>
-          <p className='text-primary-800 font-semibold max-md:text-center'>{t('contactUs')}</p>
+        <div className='space-y-4'>
+          <p className='text-primary-800 font-semibold max-md:text-center'>{t('followUs')}</p>
 
-          <div className='flex items-center gap-3'>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaInstagram size={24} />
-            </a>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaTiktok size={24} />
-            </a>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaLinkedin size={24} />
-            </a>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaYoutube size={24} />
-            </a>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaTwitter size={24} />
-            </a>
-            <a href="#" className="text-primary-800 hover:scale-110 transition-all duration-300">
-              <FaFacebook size={24} />
-            </a>
+          <div className='flex items-center justify-center gap-4 flex-wrap'>
+            {settings?.social_media?.facebook && (
+              <a href={settings.social_media.facebook} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-blue-600 transition-colors'>
+                <FaFacebook className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.twitter && (
+              <a href={settings.social_media.twitter} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-blue-400 transition-colors'>
+                <FaTwitter className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.instagram && (
+              <a href={settings.social_media.instagram} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-pink-600 transition-colors'>
+                <FaInstagram className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.linkedin && (
+              <a href={settings.social_media.linkedin} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-blue-700 transition-colors'>
+                <FaLinkedin className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.youtube && (
+              <a href={settings.social_media.youtube} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-red-600 transition-colors'>
+                <FaYoutube className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.tiktok && (
+              <a href={settings.social_media.tiktok} target='_blank' rel='noopener noreferrer' className='text-primary-800 hover:text-black transition-colors'>
+                <FaTiktok className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.whatsapp && (
+              <a 
+                href={`https://wa.me/${settings.social_media.whatsapp.replace(/[^0-9]/g, '')}`} 
+                target='_blank' 
+                rel='noopener noreferrer' 
+                className='text-primary-800 hover:text-green-500 transition-colors'
+                aria-label='WhatsApp'
+              >
+                <FaWhatsapp className='w-6 h-6' />
+              </a>
+            )}
+            {settings?.social_media?.telegram && (
+              <a 
+                href={settings.social_media.telegram.startsWith('@') 
+                  ? `https://t.me/${settings.social_media.telegram.substring(1)}` 
+                  : settings.social_media.telegram} 
+                target='_blank' 
+                rel='noopener noreferrer' 
+                className='text-primary-800 hover:text-blue-400 transition-colors'
+                aria-label='Telegram'
+              >
+                <FaTelegram className='w-6 h-6' />
+              </a>
+            )}
           </div>
+          
+
+
         </div>
         {/* localization */}
         <LocaleSwitcher isDark/>

@@ -210,14 +210,14 @@ const Navbar = ({ logo }) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ duration: 0.5 }}
-                      className="fixed left-0 right-0 mt-6 w-[70%] mx-auto bg-primary-800 shadow-xl rounded-xl p-6 z-50"
+                      className="fixed left-0 right-0 mt-6 mx-auto lg:w-5xl bg-primary-800 shadow-xl rounded-xl p-6 z-50"
                       onMouseEnter={() => setIsProductsHovered(true)}
                       onMouseLeave={() => setIsProductsHovered(false)}
                     >
                       <div className="grid grid-cols-3 gap-6">
                         {products?.map((category, index) => (
-                          <Link href={`/products/${category?.slug}`} key={index} className="flex gap-2 items-center">
-                            <Image src={category?.main_image} alt={category?.name} width={100} height={100} className="object-cover object-center size-10 max-md:flex-shrink-0 " priority />
+                          <Link href={`/products/${category?.slug}`} key={index} className="flex gap-2 items-center flex-col">
+                            <Image src={category?.main_image} alt={category?.name} width={100} height={100} className="object-cover object-center size-16  rounded-full" priority />
                             <h4 className="font-semibold text-white text-xs">
                               {category?.name}
                             </h4>

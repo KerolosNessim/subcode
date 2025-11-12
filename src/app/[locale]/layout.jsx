@@ -10,6 +10,7 @@ import WhatsappContact from "@/components/shared/whatsapp-contact";
 import { Toaster } from "@/components/ui/sonner";
 import { getSettings } from "@/services/fetch-settings";
 import Script from "next/script";
+import FloatingSocials from "@/components/shared/floating-social";
 
 const alexandria = Alexandria({
   subsets: ["latin"],
@@ -107,7 +108,8 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Navbar logo={settings?.site_logo} />
           <Toaster position="top-center" richColors />
-          <WhatsappContact number={settings?.social_media?.whatsapp} />
+          <FloatingSocials social={settings?.social_media} />
+          {/* <WhatsappContact number={settings?.social_media?.whatsapp} /> */}
           {children}
           <Footer settings={settings} />
         </NextIntlClientProvider>

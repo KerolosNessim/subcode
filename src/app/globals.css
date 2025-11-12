@@ -146,11 +146,10 @@
 /* Main image styling */
 .image-gallery-slide img {
   border-radius: 0.5rem;
-  max-height: 500px;
+  height: 400px;
   width: 100%;
   margin: 0 auto;
   object-fit: contain;
-
 }
 
 /* Thumbnail container */
@@ -166,7 +165,7 @@
   overflow: hidden;
   transition: all 0.3s ease !important;
   opacity: 0.7;
-  width: 24.5% !important;
+  width: 25% !important;
 }
 
 .image-gallery-thumbnail:hover,
@@ -177,8 +176,10 @@
 
 .image-gallery-thumbnail img {
   border-radius: 0.25rem !important;
-  width: auto !important;
-  object-fit: cover;
+
+  height: 100px !important;
+  object-fit: cover !important;
+  margin: 0 auto !important;
 }
 
 /* Navigation buttons */

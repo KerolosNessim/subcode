@@ -121,7 +121,7 @@ const SingleProductPage = () => {
               {/* Category */}
               {singleWork?.tags?.length > 0 && (
                 <div>
-                  <p>{b('singleWork.category')}</p>
+                  {/* <p>{b('singleWork.category')}</p> */}
                   <div className="flex gap-2">
                     {singleWork?.tags?.map((tag, index) => (
                       <p key={index} className="text-gray-200 text-xs border border-gray-200/50 rounded-full py-2 px-4 w-fit">

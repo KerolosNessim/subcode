@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import SafeImage from "@/components/shared/safe-image";
+import { resolveImageSrc } from "@/lib/utils";
 import { getData } from "@/services/fetch-data";
 
 const Counters = () => {
@@ -58,16 +59,18 @@ const Counters = () => {
 
       {/* counters */}
       <div className="grid md:grid-cols-4 grid-cols-2 lg:gap-8 gap-4 mt-4 place-items-center ">
-        {counters.map((counter, i) => (
+        {counters
+          .filter((counter) => resolveImageSrc(counter?.icon))
+          .map((counter, i) => (
           <motion.div
             initial={{ opacity: 0, y:-10, x:-10 }}
             whileInView={{ opacity: 1, y: 0, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: i * 0.2 }}
             key={i} className="flex items-center gap-4">
-            <Image
+            <SafeImage
               src={counter?.icon}
-              alt="counter"
+              alt={counter?.label || "counter"}
               width={100}
               height={100}
               className="lg:size-16 size-12 object-contain"

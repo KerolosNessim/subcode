@@ -140,5 +140,13 @@
     "already": "email already exists" ,
     "success": "subscribed successfully",
     "error": "an error occurred try again"
+  },
+  "notFound": {
+    "badge": "Page not found",
+    "breadcrumb": "Page not found",
+    "title": "Sorry, this page doesn't exist",
+    "description": "The link you're looking for may be broken or the page may have been moved. You can return home or contact us for help.",
+    "backHome": "Back to Home",
+    "contactUs": "Contact Us"
   }
 }

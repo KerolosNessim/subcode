@@ -5,7 +5,7 @@ export async function getSettings() {
     url: "/settings",
   });
   if (res?.code == 200) {
-    return res?.data?.data[0];
+    return res?.data?.data?.[0] ?? {};
   } else {
     return {};
   }

@@ -1,5 +1,6 @@
 import CustomBreadcrumbs from '@/components/shared/custom-breadcrumbs'
 import Image from 'next/image'
+import SafeImage from '@/components/shared/safe-image'
 import React from 'react'
 import * as motion from "motion/react-client"
 import {
@@ -81,7 +82,7 @@ const SinglrServicePage = async ({ params }) => {
               {/* image */}
               <div className='lg:w-1/2 w-full relative py-12 z-1'>
                 <Image src="/images/waves-circle.svg" width={600} height={600} alt="victor" className='lg:size-60 md:size-40 size-28  object-contain absolute top-0 end-0 -z-1' />
-                <Image src={service?.image} width={600} height={600} alt="victor" className='w-full' />
+                <SafeImage src={service?.image} width={600} height={600} alt={service?.title || "service"} className='w-full' />
               </div>
             </motion.div>
             {/* featuers */}
@@ -103,7 +104,7 @@ const SinglrServicePage = async ({ params }) => {
                   {service?.feature_services?.map((feature, i) => (
                     <CarouselItem key={i} className={"basis-[80%] md:basis-[45%] lg:basis-1/4 py-4 pl-6"}>
                       <div className="group space-y-4 text-center border-2 border-primary-800 rounded-xl p-10 bg-white text-primary-800 hover:text-white cursor-pointer  hover:bg-[linear-gradient(to_bottom,#104F6A,#14688BB2),url('/images/card-pattern.svg')] ">
-                        <Image src={feature?.image} width={600} height={600} alt="victor" className='w-1/3 mx-auto' />
+                        <SafeImage src={feature?.image} width={600} height={600} alt={feature?.title || "feature"} className='w-1/3 mx-auto' />
                         <h3 className='text-xl font-bold'>{feature?.title}</h3>
                         <p className='text-gray-200 group-hover:text-white text-lg leading-8 '>{feature?.description}</p>
                       </div>

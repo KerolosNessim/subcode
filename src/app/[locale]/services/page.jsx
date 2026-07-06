@@ -5,6 +5,7 @@ import { getData } from '@/services/fetch-data';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image';
+import SafeImage from '@/components/shared/safe-image';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import * as motion from 'motion/react-client';
 import DynamicLink from '@/components/shared/dynamic-link';
@@ -129,11 +130,11 @@ export const Card = ({
         </div>
         {/* image */}
         <div className='md:w-1/2 max-md:hidden md:h-[400px] h-[250px]  rounded pe-10'>
-          <Image
+          <SafeImage
             src={img}
             width={300}
             height={300}
-            alt="victor"
+            alt={title || "service"}
             className=" w-full h-full object-contain drop-shadow-xl  drop-shadow-white-50/10 "
           />
         </div>

@@ -3,6 +3,7 @@ import { ReactLenis } from 'lenis/react';
 import { useTransform, motion, useScroll } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import SafeImage from './safe-image';
 import SectionHeader from './section-header';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import DynamicLink from './dynamic-link';
@@ -151,11 +152,11 @@ export const Card = ({
         </div>
         {/* image */}
         <div className='md:w-1/2 max-md:hidden md:h-[400px] h-[250px]  rounded pe-10'>
-          <Image
+          <SafeImage
             src={img}
             width={300}
             height={300}
-            alt="victor"
+            alt={title || "service"}
             className=" w-full h-full object-contain drop-shadow-xl  drop-shadow-white-50/10 "
           />
         </div>

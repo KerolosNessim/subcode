@@ -3,6 +3,8 @@ import SectionHeader from '../shared/section-header'
 import DynamicLinkDark from '../shared/dynamic-link-dark'
 import DynamicLink from '../shared/dynamic-link'
 import Image from 'next/image'
+import SafeImage from '../shared/safe-image'
+import { resolveImageSrc } from '@/lib/utils'
 import * as motion from "motion/react-client"
 import { getData } from '@/services/fetch-data'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -61,12 +63,12 @@ const AboutSection = async ({knowMoreLink=true}) => {
             alt='about' 
             className='animate-pulse object-cover absolute top-0 -end-0' 
           />
-          {data?.[`image_${locale}`] && (
-            <Image 
+          {resolveImageSrc(data?.[`image_${locale}`]) && (
+            <SafeImage 
               src={data[`image_${locale}`]} 
               width={450} 
               height={450} 
-              alt='about' 
+              alt={data?.title || 'about'} 
               className='absolute bottom-0 end-[17%] object-contain object-bottom' 
             />
           )}

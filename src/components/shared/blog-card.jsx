@@ -1,6 +1,6 @@
 import React from 'react'
 import DynamicLink from './dynamic-link'
-import Image from 'next/image'
+import SafeImage from './safe-image'
 import { useTranslations } from 'next-intl'
 
 const BlogCrd = ({ blog }) => {
@@ -8,7 +8,7 @@ const BlogCrd = ({ blog }) => {
   return (
     <div className='bg-white rounded-2xl shadow-md overflow-hidden'>
       {/* image */}
-      <Image src={blog?.image} alt="work" width={300} height={300} className='w-full h-60 object-cover' />
+      <SafeImage src={blog?.image} alt={blog?.title || "blog"} width={300} height={300} className='w-full h-60 object-cover' />
 
       {/* content */}
       <div className='px-6 py-8  space-y-6'>

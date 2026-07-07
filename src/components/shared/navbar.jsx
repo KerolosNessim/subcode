@@ -2,7 +2,7 @@
 import { Link } from "@/i18n/navigation";
 import { FiMenu } from "react-icons/fi";
 import LocaleSwitcher from "./locale-switcher";
-import Image from "next/image";
+import SafeImage from "./safe-image";
 import {
   Sheet,
   SheetContent,
@@ -164,8 +164,9 @@ const Navbar = ({ logo }) => {
         className="flex items-center justify-center md:size-16 size-12 bg-black rounded-full shrink-0 ms-2 md:ms-0"
         aria-label="Home"
       >
-        <Image
-          src={logo || "/images/logo.png"}
+        <SafeImage
+          src={logo}
+          fallback="/images/logo.png"
           alt="Logo"
           width={100}
           height={100}
@@ -215,9 +216,11 @@ const Navbar = ({ logo }) => {
                       onMouseLeave={() => setIsProductsHovered(false)}
                     >
                       <div className="grid grid-cols-3 gap-6">
-                        {products?.map((category, index) => (
+                        {products
+                          ?.filter((category) => category?.main_image)
+                          .map((category, index) => (
                           <Link href={`/products/${category?.slug}`} key={index} className="flex gap-2 items-center flex-col">
-                            <Image src={category?.main_image} alt={category?.name} width={100} height={100} className="object-cover object-center size-16  rounded-full" priority />
+                            <SafeImage src={category?.main_image} alt={category?.name || "product"} width={100} height={100} className="object-cover object-center size-16  rounded-full" priority />
                             <h4 className="font-semibold text-white text-xs">
                               {category?.name}
                             </h4>

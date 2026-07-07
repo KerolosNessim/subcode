@@ -140,5 +140,13 @@
   "already": "E-posta zaten mevcut",
   "success": "Başarıyla abone olundu",
   "error": "Bir hata oluştu, lütfen tekrar deneyin"
-}
+},
+  "notFound": {
+    "badge": "Sayfa bulunamadı",
+    "breadcrumb": "Sayfa bulunamadı",
+    "title": "Üzgünüz, bu sayfa mevcut değil",
+    "description": "Aradığınız bağlantı hatalı olabilir veya sayfa taşınmış olabilir. Ana sayfaya dönebilir veya bizimle iletişime geçebilirsiniz.",
+    "backHome": "Ana Sayfaya Dön",
+    "contactUs": "İletişime Geçin"
+  }
 }

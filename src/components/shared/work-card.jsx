@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import SafeImage from './safe-image'
 import React from 'react'
 import DynamicLink from './dynamic-link'
 import { useTranslations } from 'next-intl'
@@ -8,7 +8,7 @@ const t = useTranslations("works")
   return (
     <div className='bg-white rounded-4xl shadow-md overflow-hidden'>
       {/* image */}
-      <Image src={data?.main_image} alt="work" width={300} height={300} className='w-full h-60 object-cover' />
+      <SafeImage src={data?.main_image} alt={data?.name || "work"} width={300} height={300} className='w-full h-60 object-cover' />
 
       {/* content */}
       <div className='px-6 py-8 text-center space-y-6'>

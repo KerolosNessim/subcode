@@ -9,6 +9,7 @@ import Footer from "@/components/shared/footer";
 import WhatsappContact from "@/components/shared/whatsapp-contact";
 import { Toaster } from "@/components/ui/sonner";
 import { getSettings } from "@/services/fetch-settings";
+import { resolveImageSrc } from "@/lib/utils";
 import Script from "next/script";
 import FloatingSocials from "@/components/shared/floating-social";
 
@@ -21,24 +22,28 @@ const alexandria = Alexandria({
 
 // ✅ 1. Generate metadata dynamically
 export async function generateMetadata({ params }) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const settings = await getSettings();
   const seo = settings?.seo || {};
+  const favicon = resolveImageSrc(settings?.site_favicon);
+  const ogImage = resolveImageSrc(settings?.site_og_image, settings?.site_favicon);
 
   return {
     title: settings?.site_name,
     description: seo.meta_description || settings?.site_description,
     keywords: seo.meta_keywords,
-    icons: {
-      icon: settings?.site_favicon
-    },
+    ...(favicon && {
+      icons: {
+        icon: favicon,
+      },
+    }),
     openGraph: {
       title: settings?.site_name,
       description: seo.meta_description,
-      images: [settings?.site_og_image || settings?.site_favicon],
+      ...(ogImage && { images: [ogImage] }),
       locale,
       type: "website",
     },
@@ -46,14 +51,14 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: settings?.site_name,
       description: seo.meta_description,
-      images: [settings?.site_og_image || settings?.site_favicon],
+      ...(ogImage && { images: [ogImage] }),
     },
   };
 }
 
 // ✅ 2. Root layout
 export default async function RootLayout({ children, params }) {
-  const { locale } = params;
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const messages = await getMessages();

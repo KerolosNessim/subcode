@@ -19,6 +19,7 @@ import ImageGallery from "react-image-gallery"
 import "react-image-gallery/styles/css/image-gallery.css";
 
 import Markdown from 'react-markdown'
+import { resolveImageSrc } from '@/lib/utils'
 const SingleWorkPage = () => {
   const locale = useLocale();
   const b = useTranslations()
@@ -38,20 +39,19 @@ const SingleWorkPage = () => {
       setSingleWork(workData)
 
       // Format images for React Image Gallery
-      const galleryImages = [
-        {
-          original: workData.main_image,
-          thumbnail: workData.main_image,
-          originalAlt: workData.name,
-          thumbnailAlt: workData.name
-        },
-        ...workData.images.map(img => ({
-          original: img,
-          thumbnail: img,
-          originalAlt: workData.name,
-          thumbnailAlt: workData.name
-        }))
-      ];
+      const gallerySources = [
+        workData.main_image,
+        ...(Array.isArray(workData.images) ? workData.images : []),
+      ]
+        .map((img) => resolveImageSrc(img))
+        .filter(Boolean);
+
+      const galleryImages = gallerySources.map((img) => ({
+        original: img,
+        thumbnail: img,
+        originalAlt: workData.name,
+        thumbnailAlt: workData.name,
+      }));
 
       setImages(galleryImages);
     }

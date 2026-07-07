@@ -23,6 +23,7 @@ const AboutSection = async ({knowMoreLink=true}) => {
   else {
     data = null
   }
+  
   return (
     data?
     <section className='pt-16 space-y-8 overflow-hidden' >
@@ -65,7 +66,7 @@ const AboutSection = async ({knowMoreLink=true}) => {
           />
           {resolveImageSrc(data?.[`image_${locale}`]) && (
             <SafeImage 
-              src={data[`image_${locale}`]} 
+              src={data?.[`image_${locale}`]} 
               width={450} 
               height={450} 
               alt={data?.title || 'about'} 

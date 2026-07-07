@@ -22,7 +22,7 @@ const alexandria = Alexandria({
 
 // ✅ 1. Generate metadata dynamically
 export async function generateMetadata({ params }) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }) {
 
 // ✅ 2. Root layout
 export default async function RootLayout({ children, params }) {
-  const { locale } = params;
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
 
   const messages = await getMessages();

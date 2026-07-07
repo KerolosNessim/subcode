@@ -21,6 +21,7 @@ const PartnerMarquee =  () => {
   useEffect(() => {
     getParteners()
   }, [])
+  console.log(images)
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee repeat={100} reverse pauseOnHover className="[--duration:25s] [--gap:3rem]">
